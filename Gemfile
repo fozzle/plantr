@@ -10,9 +10,6 @@ gem 'sqlite3'
 # Grape because we're just making an API
 gem 'grape'
 
-# Devise for auth
-gem 'devise'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

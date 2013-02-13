@@ -1,21 +1,40 @@
 class API < Grape::API
-
 	prefix "api"
 	format :json
 
 	helpers do
-    def current_user
-      warden.user
-    end
+	 #  def current_user
+	 #    warden.user
+	 #  end
 
-    def authenticated
-		  if warden.authenticated?
-		    return true
-		  else
-		    error!('401 Unauthorized', 401)
-		  end
-		end
+	 #  def authenticated
+		#   if warden.authenticated?
+		#     return true
+		#   else
+		#     error!('401 Unauthorized', 401)
+		#   end
+		# end
   end
+
+  # resource "auth" do
+  # 	desc "Login user"
+  # 	params do
+  # 		group :user do
+	 #  		requires :email, type: String, desc: "User email"
+	 #  		requires :password, type: String, desc: "password"
+	 #  	end
+  # 	end
+  # 	post do
+  # 		user = User.find_by_email(params[:user][:email])
+  # 		if user.password == params[:user][:password]
+  # 			current_user = user
+  # 		else
+  # 			throw :error, status: 401, message: "Invalid login!"
+  # 		end
+  # 	end
+  # end
+
+
 	
 	resource "users" do
 
@@ -31,19 +50,14 @@ class API < Grape::API
 
 		desc "Create a user."
 		params do
-			requires :username, type: String, desc: "Unique username."
-			requires :email, type: String, desc: "email address."
-			requires :password, type: String, desc: "password"
-			requires :first_name, type: String, desc: "First name."
-			requires :last_name, type: String, desc: "Last name."
+			group :user do
+				requires :email, type: String, desc: "email address."
+				requires :password, type: String, desc: "password"
+			end
 		end
 		post do
-			user = User.new(params)
-			if User.where(email: params[:email]).any?
-				throw :error, status: 400, message: "Username taken!"
-			else
-				user.save
-			end
+			user = User.new(params[:user])
+			user.save
 		end
 
 		# desc "Return the user's garden"
@@ -60,7 +74,7 @@ class API < Grape::API
 
 		desc "Retrieve user's gardens"
 		get do
-			current_user.gardens
+			User.first.gardens
 		end
 
 		desc "Create a garden"
@@ -83,5 +97,13 @@ class API < Grape::API
 		end
 
 	end
+
+	resource "plants" do
+
+		desc "Create a plant"
+		params do
+			requires :name, type: String, desc:"Name of plant"
+		end
+		
 
 end
