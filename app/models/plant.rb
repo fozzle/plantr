@@ -1,5 +1,6 @@
 class Plant < ActiveRecord::Base
 	belongs_to :garden
 	belongs_to :plant_type
-  attr_accessible :name, :sunlight, :temperature, :water, :plant_date
+	has_one :sensor
+  attr_accessible :name, :plant_date, :plant_type_id, :garden_id
 end

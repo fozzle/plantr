@@ -60,13 +60,11 @@ class API < Grape::API
 			user.save
 		end
 
-		# desc "Return the user's garden"
-		# params do
-		# 	requires :user_id, :type => Integer, :desc => "User id"
-		# end
-		# get :user_gardens do
-		# 	Garden.where(user: params[:user_id])
-		# end
+		desc "Destroy user"
+		delete ":id" do
+			user = User.find(params[:id])
+			user.destroy
+		end
 
 	end
 
@@ -79,11 +77,13 @@ class API < Grape::API
 
 		desc "Create a garden"
 		params do
-			requires :name, type: String, desc: "Name of the garden"
+			group :garden do
+				requires :name, type: String, desc: "Name of the garden"
+			end
 		end
 		post do
-			garden = Garden.new(params)
-			if current_user.gardens.where(name: params[:name]).any?
+			garden = Garden.new(params[:garden])
+			if User.first.gardens.where(name: params[:name]).any?
 				throw :error, status: 400, message: "You already have that"
 			else
 				garden.save
@@ -93,7 +93,26 @@ class API < Grape::API
 		desc "List plants in garden"
 		get ':id/plants' do
 			garden = Garden.find(params[:id])
-			Plants.where(garden: garden)
+			Plant.where(garden_id: garden)
+		end
+
+		desc "Add user to garden"
+		params do
+			group :garden do
+				requires :garden_id, type: Integer, desc: "Garden ID"
+				requires :user_id, type: Integer, desc: "User ID"
+			end
+		end
+		put 'add_user' do
+			garden = Garden.find(params[:garden][:garden_id])
+			garden.users << User.find(params[:garden][:user_id])
+			garden.save
+		end
+
+		desc "Destroy garden"
+		delete ":id" do
+			garden = Garden.find(params[:id])
+			garden.destroy
 		end
 
 	end
@@ -102,8 +121,58 @@ class API < Grape::API
 
 		desc "Create a plant"
 		params do
-			requires :name, type: String, desc:"Name of plant"
+			group :plant do
+				requires :name, type: String, desc:"Name of plant"
+				requires :plant_type_id, type: Integer, desc:"Plant type"
+			end
 		end
-		
+		post do
+			plant = Plant.new(params[:plant])
+			plant.save
+		end
 
+		desc "Retrieve sensor logs"
+		get ":id/logs" do
+			plant = Plant.find(params[:id])
+			plant.sensor.logs
+		end
+
+		desc "Destroy plant"
+		delete ":id" do
+			plant = Plant.find(params[:id])
+			plant.destroy
+		end
+	end
+
+	resource "sensors" do
+
+		desc "Create a sensor"
+		params do
+			group :sensor do
+				requires :name, type: String, desc: "Name of sensor"
+				requires :description, type: String, desc: "Blurb about sensor"
+				requires :plant_id, type: Integer, desc: "Which plant?"
+			end
+		end
+		post do
+			sensor = Sensor.new(params[:sensor])
+			sensor.save
+		end
+	end
+
+	resource "logs" do
+		desc "Create new log"
+		params do
+			group :log do
+				requires :sensor_id, type:Integer, desc: "Sensor id"
+				requires :sunlight, type: Integer, desc: "Sunlight reading"
+				requires :moisture, type: Integer, desc: "Moisture reading"
+				requires :temperature, type: Integer, desc: "Temp reading (F)"
+			end
+		end
+		post do
+			log = Log.new(params[:log])
+			log.save
+		end
+	end
 end

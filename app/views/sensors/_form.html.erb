@@ -20,8 +20,8 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :garden_id %><br />
-    <%= collection_select(:sensor, :garden_id, Garden.all, :id, :name, {:prompt => "select garden"}) %>
+    <%= f.label :plant_id %><br />
+    <%= collection_select(:sensor, :plant_id, Plant.all, :id, :name, {:prompt => "select plant"}) %>
   </div>
   <div class="actions">
     <%= f.submit %>

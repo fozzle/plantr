@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  sunlight: 1
+  water: 1
+  temperature: 1
+
+two:
+  name: MyString
+  sunlight: 1
+  water: 1
+  temperature: 1

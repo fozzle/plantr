@@ -41,7 +41,8 @@ class GardensController < ApplicationController
   # POST /gardens.json
   def create
     @garden = Garden.new(params[:garden])
-
+    @user = User.find(params[:user][:user_id])
+    @garden.users << @user
     respond_to do |format|
       if @garden.save
         format.html { redirect_to @garden, notice: 'Garden was successfully created.' }
