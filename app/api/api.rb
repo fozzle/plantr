@@ -124,6 +124,8 @@ class API < Grape::API
 			group :plant do
 				requires :name, type: String, desc:"Name of plant"
 				requires :plant_type_id, type: Integer, desc:"Plant type"
+				requires :sensor_id, type: Integer, desc:"Sensor ID"
+				requires :garden_id, type: Integer, desc:"Garden ID"
 			end
 		end
 		post do
@@ -151,7 +153,6 @@ class API < Grape::API
 			group :sensor do
 				requires :name, type: String, desc: "Name of sensor"
 				requires :description, type: String, desc: "Blurb about sensor"
-				requires :plant_id, type: Integer, desc: "Which plant?"
 			end
 		end
 		post do
