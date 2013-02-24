@@ -1,15 +1,19 @@
 Plantr::Application.routes.draw do
 
+  devise_for :users
+
   # root :to => "users#index"
-  mount Plantr::API => '/'
+  # mount Plantr::API => '/'
+
+  root :to => "home#index"
 
 
   resources :sensors
 
-
   resources :gardens
+  resources :plants
 
-  resources :users
+  resources :logs
 
 
   # The priority is based upon order of creation:
