@@ -7,8 +7,6 @@ gem 'rails', '3.2.11'
 
 gem 'sqlite3'
 
-# Grape because we're just making an API
-gem 'grape'
 
 # API taster for fun
 gem 'api_taster'
