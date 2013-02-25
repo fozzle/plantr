@@ -122,7 +122,7 @@ if Rails.env.development?
 
     desc 'Add user to garden'
     post '/gardens/:id/members.json', {
-      :user_id => 2
+      :user_id => 2,
       :id => 1
     }
 
