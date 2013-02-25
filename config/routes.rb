@@ -15,8 +15,13 @@ Plantr::Application.routes.draw do
     collection do
       get ':id/members' => "gardens#members"
       post ':id/members' => "gardens#add_member"
+      delete ':id/members' => "gardens#remove_member"
     end
-    resources :plants
+    resources :plants do
+      collection do
+        get ':id/logs' => "plants#logs"
+      end
+    end
   end
 
   resources :logs
@@ -87,14 +92,18 @@ if Rails.env.development?
 
     desc 'Create a garden'
     post '/gardens', {
-      :name => 'My Garden'
+      name: 'My Garden'
     }
 
     desc 'Delete a garden'
+    delete '/gardens/:id', {
+      id: 1
+    }
 
     desc 'Get a list of plants for a garden'
-    get '/gardens/:garden_id/plants', {
-      :garden_id => 1
+    get '/gardens/:garden_id/plants/:id', {
+      garden_id: 1,
+      id: 1
     }
 
     desc 'Sign in a user'
@@ -111,35 +120,67 @@ if Rails.env.development?
 
     desc 'Create new plant'
     post '/gardens/:garden_id/plants', {
-      :garden_id => 1,
+      garden_id: 1,
       plant: {
-        :name => 'Fart Plant',
-        :sensor_id => 1,
-        :plant_type_id => 1
+        name: 'Fart Plant',
+        sensor_id: 1,
+        plant_type_id: 1
       }
     }
 
     desc 'Delete a plant'
-    delete '/gardens/:garden_id/plants', {
-      :garden_id => 1
+    delete '/gardens/:garden_id/plants/:id', {
+      garden_id: 1,
+      id: 1
     }
 
     desc 'Show plant details'
     get '/gardens/:garden_id/plants/:id', {
-      :garden_id => 1,
-      :id => 1
+      garden_id: 1,
+      id: 1
     }
 
     desc 'Add user to garden'
     post '/gardens/:id/members', {
-      :user_id => 2,
-      :id => 1
+      user_id: 2,
+      id: 1
     }
 
     desc 'List members of garden'
     get '/gardens/:id/members', {
-      :id => 1
+      id: 1
     }
+
+    desc 'Get a plants logs'
+    get '/gardens/:garden_id/plants/:id/logs', {
+      garden_id: 1,
+      id: 1
+    }
+
+    desc 'Remove self from garden'
+    delete '/gardens/:id/members', {
+      user_id: 2,
+      id: 1
+    }
+
+    desc 'Create a log'
+    post '/logs', {
+      log: {
+        sensor_id: 1,
+        sunlight: 20,
+        moisture: 20,
+        temperature: 70
+      }
+    }
+
+    desc 'Create a sensor'
+    post '/sensors', {
+      sensor: {
+        name: "My Sensor",
+        description: "This sensor is in the front garden."
+      }
+    }
+
   end
 end
 

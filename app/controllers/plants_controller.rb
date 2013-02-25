@@ -94,4 +94,19 @@ class PlantsController < ApplicationController
       render json: { error: "You are not part of this garden.", status: 403 }
     end
   end
+
+  def logs
+    @garden = Garden.find(params[:garden_id])
+
+    if @garden.has_user(current_user)
+      @plant = Plant.find(params[:id])
+      unless @plant.sensor.blank?
+        render json: @plant.sensor.logs.all
+      else
+        render json: { error: "No sensor assigned for this plant.", status: 400 }
+      end
+    else
+      render json: { error: "You are not part of this garden.", status: 403 }
+    end
+  end
 end

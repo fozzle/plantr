@@ -8,7 +8,7 @@ class GardensController < ApplicationController
     @gardens = current_user.gardens.all
 
     respond_to do |format|
-      format.json { render json: @gardens.to_json(:include) }
+      format.json { render json: @gardens.to_json(include: :plants) }
     end
   end
 
@@ -109,7 +109,7 @@ class GardensController < ApplicationController
           end
 
         else
-          render json: { errors: "User has already been added.", status: 200}
+          render json: { errors: "User has already been added.", status: 400}
         end
       end
       
@@ -122,6 +122,17 @@ class GardensController < ApplicationController
     @garden = Garden.find(params[:id])
     respond_to do |format|
       format.json { render json: @garden.users.all }
+    end
+  end
+
+  def remove_member
+    @garden = Garden.find(params[:id])
+    @user = User.find(params[:user_id])
+    if @garden.has_user(current_user) and @user == current_user
+      @garden.users.delete(@user)
+      render json: @garden.users.all
+    else
+      render json: { errors: "You are not allowed to take this action.", status: 400 }
     end
   end
 end
