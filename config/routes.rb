@@ -83,51 +83,61 @@ end
 if Rails.env.development?
   ApiTaster.routes do
     desc 'Get a list of gardens for a user'
-    get '/gardens.json'
+    get '/gardens'
 
     desc 'Create a garden'
-    post '/gardens.json', {
+    post '/gardens', {
       :name => 'My Garden'
     }
 
     desc 'Delete a garden'
 
     desc 'Get a list of plants for a garden'
-    get '/gardens/:garden_id/plants.json', {
+    get '/gardens/:garden_id/plants', {
       :garden_id => 1
     }
 
     desc 'Sign in a user'
-    post '/users/sign_in.json', {
-      :user => 'kylepetrovich@gmail.com',
-      :password => 'poophands',
-      :remember_me => 1
+    post '/users/sign_in', {
+      user: {
+        email: 'kylepetrovich@gmail.com',
+        password: 'poophands',
+        remember_me: 1
+      } 
     }
 
     desc 'Sign out a user'
-    delete '/users/sign_out.json'
+    delete '/users/sign_out'
 
     desc 'Create new plant'
-    post '/gardens/:garden_id/plants.json', {
+    post '/gardens/:garden_id/plants', {
       :garden_id => 1,
-      :name => 'Fart Plant',
-      :sensor_id => 1,
-      :plant_type_id => 1
+      plant: {
+        :name => 'Fart Plant',
+        :sensor_id => 1,
+        :plant_type_id => 1
+      }
     }
 
     desc 'Delete a plant'
-    delete '/gardens/:garden_id/plants.json', {
+    delete '/gardens/:garden_id/plants', {
       :garden_id => 1
     }
 
+    desc 'Show plant details'
+    get '/gardens/:garden_id/plants/:id', {
+      :garden_id => 1,
+      :id => 1
+    }
+
     desc 'Add user to garden'
-    post '/gardens/:id/members.json', {
+    post '/gardens/:id/members', {
       :user_id => 2,
       :id => 1
     }
 
     desc 'List members of garden'
-    get '/gardens/:id/members.json', {
+    get '/gardens/:id/members', {
       :id => 1
     }
   end

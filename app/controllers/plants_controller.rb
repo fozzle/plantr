@@ -8,7 +8,6 @@ class PlantsController < ApplicationController
   		@plants = @garden.plants.all
 
   		respond_to do |format|
-        format.html # index.html.erb
         format.json { render json: @plants }
       end
 
@@ -26,7 +25,6 @@ class PlantsController < ApplicationController
 
       if @garden.has_plant(@plant)
         respond_to do |format|
-          format.html # index.html.erb
           format.json { render json: @plant }
         end
       else
@@ -48,10 +46,8 @@ class PlantsController < ApplicationController
 
       respond_to do |format|
         if @plant.save
-          format.html { redirect_to garden_plants_url(@garden), notice: 'Plant created.' }
           format.json { render json: @plant, status: :created, location: garden_plants_url(@garden) }
         else
-          format.html { render action: "new" }
           format.json { render json: @plant.errors, status: :unprocessable_entity }
         end
       end
@@ -69,10 +65,8 @@ class PlantsController < ApplicationController
 
       respond_to do |format|
         if @plant.update_attributes(params[:plant])
-          format.html { redirect_to @plant, notice: 'Plant was successfully updated.' }
           format.json { head :no_content }
         else
-          format.html { render action: "edit" }
           format.json { render json: @plant.errors, status: :unprocessable_entity }
         end
       end
@@ -93,7 +87,6 @@ class PlantsController < ApplicationController
       @plant.destroy
 
       respond_to do |format|
-        format.html { redirect_to plants_url }
         format.json { head :no_content }
       end
 

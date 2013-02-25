@@ -8,8 +8,7 @@ class GardensController < ApplicationController
     @gardens = current_user.gardens.all
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @gardens.to_json(:include => [:plants]) }
+      format.json { render json: @gardens.to_json(:include) }
     end
   end
 
@@ -20,7 +19,6 @@ class GardensController < ApplicationController
 
     if @garden.has_user(current_user)
       respond_to do |format|
-        format.html # show.html.erb
         format.json { render json: @garden }
       end
     else
@@ -35,7 +33,6 @@ class GardensController < ApplicationController
     @garden = Garden.new
 
     respond_to do |format|
-      format.html # new.html.erb
       format.json { render json: @garden }
     end
   end
@@ -52,10 +49,8 @@ class GardensController < ApplicationController
     @garden.users << current_user
     respond_to do |format|
       if @garden.save
-        format.html { redirect_to @garden, notice: 'Garden was successfully created.' }
         format.json { render json: @garden, status: :created, location: @garden }
       else
-        format.html { render action: "new" }
         format.json { render json: @garden.errors, status: :unprocessable_entity }
       end
     end
@@ -70,10 +65,8 @@ class GardensController < ApplicationController
 
       respond_to do |format|
         if @garden.update_attributes(params[:garden])
-          format.html { redirect_to @garden, notice: 'Garden was successfully updated.' }
           format.json { head :no_content }
         else
-          format.html { render action: "edit" }
           format.json { render json: @garden.errors, status: :unprocessable_entity }
         end
       end
@@ -93,7 +86,6 @@ class GardensController < ApplicationController
       @garden.destroy
 
       respond_to do |format|
-        format.html { redirect_to gardens_url }
         format.json { head :no_content }
       end
 
@@ -106,12 +98,21 @@ class GardensController < ApplicationController
     @garden = Garden.find(params[:id])
 
     if @garden.has_user(current_user)
-      @garden.users << User.find(params[:user_id])
-      @garden.save
-      respond_to do |format|
-        format.html { render 'Updated' }
-        format.json { render json: @garden.users.all }
+      @user = User.find(params[:user_id])
+      if not @user.blank?
+        if not @garden.users.include?(@user)
+          @garden.users << User.find(params[:user_id])
+          @garden.save
+
+          respond_to do |format|
+            format.json { render json: @garden.users.all }
+          end
+
+        else
+          render json: { errors: "User has already been added.", status: 200}
+        end
       end
+      
     else
       render json: { errors: "You are not part of this garden.", status: 403 }
     end
@@ -120,7 +121,6 @@ class GardensController < ApplicationController
   def members
     @garden = Garden.find(params[:id])
     respond_to do |format|
-      format.html { redirect_to gardens_url }
       format.json { render json: @garden.users.all }
     end
   end
