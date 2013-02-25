@@ -9,7 +9,7 @@ class GardensController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @gardens }
+      format.json { render json: @gardens.to_json(:include => [:plants]) }
     end
   end
 
