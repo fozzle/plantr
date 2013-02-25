@@ -12,6 +12,10 @@ Plantr::Application.routes.draw do
   resources :sensors
 
   resources :gardens do
+    collection do
+      get ':id/members' => "gardens#members"
+      post ':id/members' => "gardens#add_member"
+    end
     resources :plants
   end
 
@@ -116,7 +120,16 @@ if Rails.env.development?
       :garden_id => 1
     }
 
-    desc 'fart'
+    desc 'Add user to garden'
+    post '/gardens/:id/members.json', {
+      :user_id => 2
+      :id => 1
+    }
+
+    desc 'List members of garden'
+    get '/gardens/:id/members.json', {
+      :id => 1
+    }
   end
 end
 

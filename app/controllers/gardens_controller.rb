@@ -102,8 +102,26 @@ class GardensController < ApplicationController
     end
   end
 
-  def member
+  def add_member
+    @garden = Garden.find(params[:id])
 
+    if @garden.has_user(current_user)
+      @garden.users << User.find(params[:user_id])
+      @garden.save
+      respond_to do |format|
+        format.html { render 'Updated' }
+        format.json { render json: @garden.users.all }
+      end
+    else
+      render json: { errors: "You are not part of this garden.", status: 403 }
+    end
+  end
 
+  def members
+    @garden = Garden.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to gardens_url }
+      format.json { render json: @garden.users.all }
+    end
   end
 end
