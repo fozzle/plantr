@@ -11,6 +11,9 @@ gem 'sqlite3'
 # API taster for fun
 gem 'api_taster', :git => 'git://github.com/adamlutz/api_taster'
 
+# Cross domain support
+gem 'rack-cors', :require => 'rack/cors'
+
 # Devise authentication
 gem 'devise'
 
