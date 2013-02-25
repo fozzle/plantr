@@ -6,5 +6,13 @@ class Garden < ActiveRecord::Base
   def to_s
   	name
   end
+
+  def has_user(user)
+  	self.users.all.include?(user)
+  end
+
+  def has_plant(plant)
+  	self.plants.all.include?(plant)
+  end
   
 end

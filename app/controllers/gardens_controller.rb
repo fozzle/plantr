@@ -1,4 +1,5 @@
 class GardensController < ApplicationController
+  skip_before_filter :verify_authenticity_token
 
   before_filter :authenticate_user!
   # GET /gardens
@@ -17,13 +18,13 @@ class GardensController < ApplicationController
   def show
     @garden = Garden.find(params[:id])
 
-    if current_user.gardens.all.include?(@garden)
+    if @garden.has_user(current_user)
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @garden }
       end
     else
-      render json: { errors: "You are not part of this garden.", status: 401 }
+      render json: { errors: "You are not part of this garden.", status: 403 }
     end
 
   end
@@ -65,7 +66,8 @@ class GardensController < ApplicationController
   def update
     @garden = Garden.find(params[:id])
 
-    if @garden.users.all.include?(current_user)
+    if @garden.has_user(current_user)
+
       respond_to do |format|
         if @garden.update_attributes(params[:garden])
           format.html { redirect_to @garden, notice: 'Garden was successfully updated.' }
@@ -75,8 +77,9 @@ class GardensController < ApplicationController
           format.json { render json: @garden.errors, status: :unprocessable_entity }
         end
       end
+
     else
-      render json: { errors: "You are not part of this garden.", status: 401 }
+      render json: { errors: "You are not part of this garden.", status: 403 }
     end
   end
 
@@ -85,15 +88,22 @@ class GardensController < ApplicationController
   def destroy
     @garden = Garden.find(params[:id])
 
-    if @garden.users.all.include?(current_user)
+    if @garden.has_user(current_user)
+
       @garden.destroy
 
       respond_to do |format|
         format.html { redirect_to gardens_url }
         format.json { head :no_content }
       end
+
     else
-      render json: { errors: "You are not part of this garden.", status: 401 }
+      render json: { errors: "You are not part of this garden.", status: 403 }
     end
+  end
+
+  def member
+
+
   end
 end

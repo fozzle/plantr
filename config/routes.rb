@@ -1,6 +1,7 @@
 Plantr::Application.routes.draw do
 
   devise_for :users
+  mount ApiTaster::Engine => "/api_taster" if Rails.env.development?
 
   # root :to => "users#index"
   # mount Plantr::API => '/'
@@ -10,8 +11,9 @@ Plantr::Application.routes.draw do
 
   resources :sensors
 
-  resources :gardens
-  resources :plants
+  resources :gardens do
+    resources :plants
+  end
 
   resources :logs
 
@@ -73,3 +75,49 @@ Plantr::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end
+
+if Rails.env.development?
+  ApiTaster.routes do
+    desc 'Get a list of gardens for a user'
+    get '/gardens.json'
+
+    desc 'Create a garden'
+    post '/gardens.json', {
+      :name => 'My Garden'
+    }
+
+    desc 'Delete a garden'
+
+    desc 'Get a list of plants for a garden'
+    get '/gardens/:garden_id/plants.json', {
+      :garden_id => 1
+    }
+
+    desc 'Sign in a user'
+    post '/users/sign_in.json', {
+      :user => 'kylepetrovich@gmail.com',
+      :password => 'poophands',
+      :remember_me => 1
+    }
+
+    desc 'Sign out a user'
+    delete '/users/sign_out.json'
+
+    desc 'Create new plant'
+    post '/gardens/:garden_id/plants.json', {
+      :garden_id => 1,
+      :name => 'Fart Plant',
+      :sensor_id => 1,
+      :plant_type_id => 1
+    }
+
+    desc 'Delete a plant'
+    delete '/gardens/:garden_id/plants.json', {
+      :garden_id => 1
+    }
+
+    desc 'fart'
+  end
+end
+
+
