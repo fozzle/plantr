@@ -149,6 +149,7 @@ DEPENDENCIES
   devise
   jquery-rails (= 2.1.4)
   pjax_rails
+  pg
   rails (= 3.2.11)
   ratchet-rails
   sass-rails (~> 3.2.3)
