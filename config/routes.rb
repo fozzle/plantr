@@ -6,8 +6,7 @@ Plantr::Application.routes.draw do
   # root :to => "users#index"
   # mount Plantr::API => '/'
 
-  root :to => "home#index"
-
+  root :to => redirect("/gardens")
 
   resources :sensors
 

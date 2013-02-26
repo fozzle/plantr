@@ -26,6 +26,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'slim'
+gem 'simple_form'
+
+gem 'pjax_rails'
+gem 'ratchet-rails'
 gem 'jquery-rails', '= 2.1.4'
 
 # To use ActiveModel has_secure_password

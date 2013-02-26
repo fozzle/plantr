@@ -1,0 +1,5 @@
+= simple_form_for @plant, :url => url_for(:controller => 'plants', :action => 'create', :garden_id => params[:garden_id]) do |f|
+  .input-group
+    .input-row
+      = f.input :name, placeholder: 'e.g. Carrots'
+  = f.submit class: 'button', value: 'Add'

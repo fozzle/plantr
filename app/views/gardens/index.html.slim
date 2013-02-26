@@ -1,0 +1,15 @@
+= content_for(:title, 'Gardens')
+= content_for(:header_buttons_right) do
+  = link_to 'Add', new_garden_path, class: 'button'
+
+.content
+  ul.list
+    - @gardens.each do |garden|
+      li
+        a href="#{url_for(:controller => 'plants', :action => 'index', :garden_id => garden.id)}"
+          | #{garden.name}
+          span.chevron
+          span.count = garden.plants.count
+    - if @gardens.empty?
+      li style="text-align: center;"
+        | You don't have any gardens yet!

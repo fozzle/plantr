@@ -1,0 +1,17 @@
+- content_for :title, "Plantr"
+- content_for :header_content do
+  header.bar-title
+    = content_for :header_buttons_left
+    h1.title = content_for(:title)
+    = content_for :header_buttons_right
+
+.content.content-padded
+  = simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+    .input-group
+      .input-row
+        = f.input :email, label: 'Email', required: false, autofocus: true, placeholder: 'user@example.com'
+      .input-row
+        = f.input :password, required: false
+    = f.button :submit, "Log In", class: 'button-positive'
+    |  
+    = link_to "Sign Up", new_user_registration_path, class: 'button-negative'

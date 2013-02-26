@@ -12,4 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ratchet
+
 //= require_tree .
+
+$(function() {
+
+});

@@ -1,0 +1,17 @@
+- content_for :title, "Register"
+- content_for(:header_buttons_left) do
+  = link_to 'Back', new_user_session_path, class: 'button'
+- content_for :header_content do
+  header.bar-title
+    = content_for :header_buttons_left
+    h1.title = content_for(:title)
+
+.content.content-padded
+  = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    = f.error_notification
+    .input-group
+      .input-row
+        = f.input :email, required: true
+        = f.input :password, required: true
+        = f.input :password_confirmation, required: true
+    = f.button :submit, "Sign up"
