@@ -7,7 +7,6 @@ class PlantsController < ApplicationController
   		@plants = @garden.plants.all
 
   		respond_to do |format|
-        format.html
         format.json { render json: @plants }
       end
 
@@ -25,7 +24,7 @@ class PlantsController < ApplicationController
 
       if @garden.has_plant(@plant)
         respond_to do |format|
-          format.html
+
           format.json { render json: @plant }
         end
       else
@@ -52,10 +51,10 @@ class PlantsController < ApplicationController
 
       respond_to do |format|
         if @plant.save
-          format.html { redirect_to url_for(:controller => 'plants', :action => 'index', :garden_id => params[:garden_id]) }
+ { redirect_to url_for(:controller => 'plants', :action => 'index', :garden_id => params[:garden_id]) }
           format.json { render json: @plant, status: :created, location: garden_plants_url(@garden) }
         else
-          format.html
+
           format.json { render json: @plant.errors, status: :unprocessable_entity }
         end
       end

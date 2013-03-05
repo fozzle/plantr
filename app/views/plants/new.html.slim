@@ -1,8 +1,0 @@
-.content.content-padded
-  = content_for(:title, 'Add a Plant')
-  = content_for(:header_buttons_left) do
-    = link_to 'Back', url_for(:controller => 'plants', :action => 'index', :garden_id => params[:garden_id]), class: 'button'
-
-  = render 'form'
-
-= render :template => 'layouts/garden'

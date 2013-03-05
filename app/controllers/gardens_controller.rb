@@ -8,7 +8,6 @@ class GardensController < ApplicationController
     @gardens = current_user.gardens.all
 
     respond_to do |format|
-      format.html
       format.json { render json: @gardens.to_json(include: :plants) }
     end
   end
@@ -20,7 +19,7 @@ class GardensController < ApplicationController
 
     if @garden.has_user(current_user)
       respond_to do |format|
-        format.html
+
         format.json { render json: @garden }
       end
     else
@@ -35,7 +34,6 @@ class GardensController < ApplicationController
     @garden = Garden.new
 
     respond_to do |format|
-      format.html
       format.json { render json: @garden }
     end
   end
@@ -53,10 +51,10 @@ class GardensController < ApplicationController
     @garden.users << current_user
     respond_to do |format|
       if @garden.save
-        format.html { redirect_to gardens_path }
+ { redirect_to gardens_path }
         format.json { render json: @garden, status: :created, location: @garden }
       else
-        format.html
+
         format.json { render json: @garden.errors, status: :unprocessable_entity }
       end
     end
@@ -92,7 +90,7 @@ class GardensController < ApplicationController
       @garden.destroy
 
       respond_to do |format|
-        format.html redirect_to gardens_path
+ redirect_to gardens_path
         format.json { head :no_content }
       end
 
@@ -128,7 +126,6 @@ class GardensController < ApplicationController
   def members
     @garden = Garden.find(params[:id])
     respond_to do |format|
-      format.html
       format.json { render json: @garden.users.all }
     end
   end
