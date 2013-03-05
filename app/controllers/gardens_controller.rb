@@ -51,7 +51,6 @@ class GardensController < ApplicationController
     @garden.users << current_user
     respond_to do |format|
       if @garden.save
- { redirect_to gardens_path }
         format.json { render json: @garden, status: :created, location: @garden }
       else
 
@@ -90,7 +89,6 @@ class GardensController < ApplicationController
       @garden.destroy
 
       respond_to do |format|
- redirect_to gardens_path
         format.json { head :no_content }
       end
 
