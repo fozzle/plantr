@@ -5,11 +5,13 @@
 = simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
   = f.error_notification
   div data-role="fieldcontain"
-    = f.input :email, required: true, autofocus: true, placeholder: 'user@example.com'
+    = f.input :login, label: 'Username or email', required: true, autofocus: true, placeholder: 'greenthumb7'
   div data-role="fieldcontain"
     = f.input :password, required: true
+  div data-role="fieldcontain"
+    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
   fieldset.ui-grid-a
     .ui-block-a
-      = f.button :submit, "Login"
+      = f.submit "Login"
     .ui-block-b
-      = link_to "Sign Up", new_user_registration_path, data: { role: :button }
+      = link_to "Sign Up", new_user_registration_path, data: { role: 'button' }

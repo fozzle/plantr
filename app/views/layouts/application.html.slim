@@ -20,15 +20,16 @@ html
   body
     div data-role="page"
       - if content_for?(:header_content)
-        div data-role="header" data-position="fixed"
+        div data-role="header" data-position="fixed" data-id="header"
           = yield :header_content
 
       div data-role="content"
-        - flash.each do |key, value|
-          div class="flash #{key}"
-            value
-        = yield
+        - if not flash.empty?
+          .ui-bar.ui-bar-c
+            - flash.each do |key, message|
+              div class="flash #{key}" = message
+        = content_for?(:content) ? yield(:content) : yield 
 
       - if content_for?(:footer_content)
-        div data-role="footer" data-position="fixed" data-id="#{content_for(:footer_id)}"
+        div data-role="footer" data-position="fixed" data-id="footer"
           = yield :footer_content

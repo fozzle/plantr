@@ -11,13 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306165723) do
+ActiveRecord::Schema.define(:version => 20130306214524) do
 
   create_table "gardens", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "user_id"
   end
 
   create_table "gardens_users", :id => false, :force => true do |t|
@@ -73,7 +72,6 @@ ActiveRecord::Schema.define(:version => 20130306165723) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "authentication_token"
     t.string   "username"
   end
 

@@ -29,6 +29,8 @@ end
 gem 'slim'
 gem 'simple_form'
 
+gem 'annotate'
+
 gem 'jquery-rails', '= 2.1.4'
 gem 'jquery_mobile_rails'
 gem 'jquery_mobile_fa_rails'

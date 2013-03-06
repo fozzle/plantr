@@ -1,98 +1,68 @@
 class GardensController < ApplicationController
   before_filter :authenticate_user!
   
-  # GET /gardens
-  # GET /gardens.json
   def index
     @gardens = current_user.gardens.all
-
-    respond_to do |format|
-      format.json { render json: @gardens.to_json(include: [:plants, :users]) }
-    end
   end
 
-  # GET /gardens/1
-  # GET /gardens/1.json
   def show
     @garden = Garden.find(params[:id])
 
     if @garden.has_user(current_user)
-      respond_to do |format|
-
-        format.json { render json: @garden }
-      end
+      render @garden
     else
-      render json: { errors: "You are not part of this garden.", status: 403 }
+      flash[:error] = "You are not a part of this garden."
+      redirect_to gardens_path
     end
-
   end
 
-  # GET /gardens/new
-  # GET /gardens/new.json
   def new
-    @garden = Garden.new
+    @garden = User.gardens.build
 
-    respond_to do |format|
-      format.json { render json: @garden }
-    end
+    respond_with @garden
   end
 
-  # GET /gardens/1/edit
   def edit
-    format.html
     @garden = Garden.find(params[:id])
+
+    respond_with @garden
   end
 
-  # POST /gardens
-  # POST /gardens.json
   def create
-    @garden = Garden.new(params[:garden])
-    @garden.users << current_user
-    respond_to do |format|
-      if @garden.save
-        format.json { render json: @garden, status: :created, location: @garden }
-      else
+    @garden = User.gardens.build(params[:garden])
 
-        format.json { render json: @garden.errors, status: :unprocessable_entity }
-      end
+    if @garden.save
+      redirect_to gardens_path
+    else
+      render :action => 'new'
     end
   end
 
-  # PUT /gardens/1
-  # PUT /gardens/1.json
   def update
     @garden = Garden.find(params[:id])
 
     if @garden.has_user(current_user)
-
-      respond_to do |format|
-        if @garden.update_attributes(params[:garden])
-          format.json { head :no_content }
-        else
-          format.json { render json: @garden.errors, status: :unprocessable_entity }
-        end
+      if @garden.update_attributes(params[:garden])
+        redirect_to gardens_path(@garden)
+      else
+        render :action => 'edit'
       end
-
     else
-      render json: { errors: "You are not part of this garden.", status: 403 }
+      flash[:error] = "You are not a part of this garden."
+      redirect_to gardens_path
     end
   end
 
-  # DELETE /gardens/1
-  # DELETE /gardens/1.json
   def destroy
     @garden = Garden.find(params[:id])
 
     if @garden.has_user(current_user)
-
       @garden.destroy
 
-      respond_to do |format|
-        format.json { head :no_content }
-      end
-
+      redirect_to gardens_path
     else
-      render json: { errors: "You are not part of this garden.", status: 403 }
+      flash[:error] = "You are not a part of this garden."
+      redirect_to gardens_path
     end
   end
 
