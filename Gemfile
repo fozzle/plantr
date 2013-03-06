@@ -29,9 +29,8 @@ end
 gem 'slim'
 gem 'simple_form'
 
-gem 'pjax_rails'
-gem 'ratchet-rails'
 gem 'jquery-rails', '= 2.1.4'
+gem 'jquery_mobile_rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

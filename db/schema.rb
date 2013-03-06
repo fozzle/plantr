@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224215341) do
+ActiveRecord::Schema.define(:version => 20130306165723) do
 
   create_table "gardens", :force => true do |t|
     t.string   "name"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20130224215341) do
   end
 
   create_table "logs", :force => true do |t|
-    t.datetime "timestamp"
     t.integer  "sunlight"
     t.integer  "moisture"
     t.integer  "temperature"
@@ -74,6 +73,8 @@ ActiveRecord::Schema.define(:version => 20130224215341) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "authentication_token"
+    t.string   "username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

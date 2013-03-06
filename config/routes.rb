@@ -25,6 +25,8 @@ Plantr::Application.routes.draw do
 
   resources :logs
 
+  #match '*all' => 'application#cor', :constraints => {:method => 'OPTIONS'}
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

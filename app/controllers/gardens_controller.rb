@@ -1,5 +1,4 @@
 class GardensController < ApplicationController
-  layout "gardens"
   before_filter :authenticate_user!
   
   # GET /gardens
@@ -8,7 +7,7 @@ class GardensController < ApplicationController
     @gardens = current_user.gardens.all
 
     respond_to do |format|
-      format.json { render json: @gardens.to_json(include: :plants) }
+      format.json { render json: @gardens.to_json(include: [:plants, :users]) }
     end
   end
 
