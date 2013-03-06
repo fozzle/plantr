@@ -1,0 +1,15 @@
+- content_for :title, "Plantr"
+- content_for :header_content do
+  h1 = content_for(:title)
+
+= simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+  = f.error_notification
+  div data-role="fieldcontain"
+    = f.input :email, required: true, autofocus: true, placeholder: 'user@example.com'
+  div data-role="fieldcontain"
+    = f.input :password, required: true
+  fieldset.ui-grid-a
+    .ui-block-a
+      = f.button :submit, "Login"
+    .ui-block-b
+      = link_to "Sign Up", new_user_registration_path, data: { role: :button }

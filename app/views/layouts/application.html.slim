@@ -17,15 +17,18 @@ html
     link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icons/apple-touch-icon-114x114.png"
     link rel="apple-touch-icon-precomposed" sizes="72x72"   href="touch-icons/apple-touch-icon-72x72.png"
     link rel="apple-touch-icon-precomposed" sizes="57x57"   href="touch-icons/apple-touch-icon-57x57.png"
-  body data-pjax-container="data-pjax-container"
+  body
+    div data-role="page"
+      - if content_for?(:header_content)
+        div data-role="header" data-position="fixed"
+          = yield :header_content
 
-    /! Make sure all your bars are the first things in your <body>
-    - if content_for?(:header_content)
-      = yield :header_content
+      div data-role="content"
+        - flash.each do |key, value|
+          div class="flash #{key}"
+            value
+        = yield
 
-    /! Wrap all non-bar HTML in the .content div (this is actually what scrolls)
-    == yield
-
-    - if content_for?(:footer_content)
-      nav.bar-tab
-      	ul.tab-inner = yield :footer_content
+      - if content_for?(:footer_content)
+        div data-role="footer" data-position="fixed" data-id="#{content_for(:footer_id)}"
+          = yield :footer_content

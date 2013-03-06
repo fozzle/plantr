@@ -1,0 +1,16 @@
+- content_for :title, "Register"
+- content_for :header_content do
+  = link_to "Back", new_user_session_path
+  h1 = content_for(:title)
+
+= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+  = f.error_notification
+  div data-role="fieldcontain"
+    = f.input :username, required: true
+  div data-role="fieldcontain"
+    = f.input :email, required: true
+  div data-role="fieldcontain"
+    = f.input :password, required: true
+  div data-role="fieldcontain" 
+    = f.input :password_confirmation, required: true
+  = f.button :submit, "Register"
