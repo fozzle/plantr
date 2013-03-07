@@ -1,10 +1,10 @@
-- content_for :content do
-  = yield
-
 - content_for :footer_content do
   div data-role="navbar"
     ul
       li = nav_link 'Gardens', gardens_path
       li = nav_link 'Profile', edit_user_registration_path
+
+- content_for :content do
+	= yield
 
 = render :template => 'layouts/application'

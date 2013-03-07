@@ -2,7 +2,7 @@
 - content_for :header_content do
   h1 = content_for(:title)
 
-ul data-role="listview"
+ul data-role="listview" data-inset="true"
   - if not @gardens.empty?
     - @gardens.each do |garden|
       li
@@ -11,6 +11,4 @@ ul data-role="listview"
             = garden.plants.count
   - else
     li
-      | You haven't added any gardens!
-
-= render :template => 'layouts/home'
+      = link_to "Add your first garden!", new_garden_path

@@ -28,7 +28,7 @@ html
           .ui-bar.ui-bar-c
             - flash.each do |key, message|
               div class="flash #{key}" = message
-        = content_for?(:content) ? yield(:content) : yield 
+        = yield
 
       - if content_for?(:footer_content)
         div data-role="footer" data-position="fixed" data-id="footer"

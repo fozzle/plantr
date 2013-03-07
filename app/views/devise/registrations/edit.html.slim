@@ -1,15 +1,20 @@
-- content_for :title, "Edit Profile"
+- content_for :title, "Your Profile"
+- content_for :header_content do
+  h1 = content_for(:title)
 
 .content.content-padded
   = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
     = f.error_notification
-    .input-group
-      .input-row
-        = f.input :email, required: true
-        = f.input :password, required: false
-        = f.input :password_confirmation, required: false
-    = f.button :submit, "Update"
-    |  
-    = link_to 'Sign Out', destroy_user_session_path, :method => :delete, class: 'button button-negative'
-
-= render :template => 'layouts/gardens'
+    div data-role="fieldcontain"
+      = f.input :username, required: true
+    div data-role="fieldcontain"
+      = f.input :email, required: true
+    div data-role="fieldcontain"
+      = f.input :password
+    div data-role="fieldcontain" 
+      = f.input :password_confirmation
+    fieldset.ui-grid-a
+      .ui-block-a
+        = f.button :submit, "Update"
+      .ui-block-b
+        = link_to 'Sign Out', destroy_user_session_path, :method => :delete, :data => { role: 'button' }

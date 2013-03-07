@@ -1,4 +1,5 @@
 class GardensController < ApplicationController
+  layout 'home'
   before_filter :authenticate_user!
   
   def index
@@ -17,19 +18,15 @@ class GardensController < ApplicationController
   end
 
   def new
-    @garden = User.gardens.build
-
-    respond_with @garden
+    @garden = current_user.gardens.build
   end
 
   def edit
     @garden = Garden.find(params[:id])
-
-    respond_with @garden
   end
 
   def create
-    @garden = User.gardens.build(params[:garden])
+    @garden = current_user.gardens.build(params[:garden])
 
     if @garden.save
       redirect_to gardens_path
