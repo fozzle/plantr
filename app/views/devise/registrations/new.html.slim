@@ -13,4 +13,6 @@
     = f.input :password, required: true
   div data-role="fieldcontain" 
     = f.input :password_confirmation, required: true
-  = f.button :submit, "Register"
+  .ui-grid-solo
+    .ui-block-a
+      = f.button :submit, "Register"

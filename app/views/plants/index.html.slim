@@ -1,0 +1,15 @@
+- content_for :title, @garden.name
+- content_for :header_content do
+  = link_to "Back", gardens_path, class: 'ui-btn-left', data: { direction: 'reverse' }
+  h1 = content_for(:title)
+  = link_to "Add", new_garden_plant_path, class: 'ui-btn-right'
+
+ul data-role="listview" data-inset="true"
+  - if not @plants.empty?
+    - @plants.each do |plant|
+      li
+        = link_to garden_plant_path(plant) do
+          = plant.name
+  - else
+    li
+      = link_to "Add your first plant!", new_garden_plant_path(@garden)

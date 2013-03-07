@@ -1,9 +1,15 @@
-class GardensController < ApplicationController
-  layout 'home'
+class UsersController < ApplicationController
+  layout 'garden'
   before_filter :authenticate_user!
   
   def index
-    @gardens = current_user.gardens
+    @garden = Garden.find(params[:garden_id])
+
+    if @garden.has_user(current_user)
+      @users = @garden.users
+    else
+      flash[:error] = "You are not a part of this garden."
+    end
   end
 
   def new

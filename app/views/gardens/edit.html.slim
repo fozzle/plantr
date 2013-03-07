@@ -1,0 +1,6 @@
+- content_for :title, @garden.name
+- content_for :header_content do
+  = link_to "Back", garden_plants_path(@garden), class: 'ui-btn-left', data: { direction: 'reverse' }
+  h1 = content_for(:title)
+
+= render 'form'

@@ -11,9 +11,13 @@
 class Garden < ActiveRecord::Base
 	has_and_belongs_to_many :users
 	has_many :plants
-  attr_accessible :name
+  attr_accessible :name, :zip_code
 
   validates_presence_of :name
+
+  validates :zip_code, :format => { :with => /^\d{5}(-\d{4})?$/ ,
+            :message => "should be in the form 12345 or 12345-1234" },
+            :allow_blank => true
 
   def to_s
   	name

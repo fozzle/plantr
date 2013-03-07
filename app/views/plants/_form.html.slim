@@ -1,0 +1,16 @@
+= simple_form_for [@garden, @plant] do |f|
+  = f.error_notification
+  div data-role="fieldcontain"
+  	= f.input :sensor_id, label: 'Sensor Tag', required: true
+  div data-role="fieldcontain"
+    = f.input :name, placeholder: 'e.g. Carrots', required: true, wrapper: false
+  - if @plant.new_record?
+    fieldset.ui-grid-solo
+      .ui-block-a
+        = f.button :submit, "Add"
+  - else
+    fieldset.ui-grid-a
+      .ui-block-a
+        = f.button :submit, "Update"
+      .ui-block-b
+        = f.button :submit, "Reassign"

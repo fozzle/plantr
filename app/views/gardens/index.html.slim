@@ -1,12 +1,14 @@
 - content_for :title, "Gardens"
 - content_for :header_content do
   h1 = content_for(:title)
+  = link_to "Add", new_garden_path, class: 'ui-btn-right'
 
 ul data-role="listview" data-inset="true"
   - if not @gardens.empty?
     - @gardens.each do |garden|
       li
-        = link_to garden.name, gardens_path(garden) do
+        = link_to garden_plants_path(garden) do
+          = garden.name
           span.ui-li-count
             = garden.plants.count
   - else

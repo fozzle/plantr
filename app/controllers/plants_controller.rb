@@ -1,17 +1,15 @@
 class PlantsController < ApplicationController
+  layout 'garden'
   before_filter :authenticate_user!
 
 	def index
     @garden = Garden.find(params[:garden_id])
+    
     if @garden.has_user(current_user)
   		@plants = @garden.plants.all
-
-  		respond_to do |format|
-        format.json { render json: @plants }
-      end
-
     else
-      render json: { error: "You are not part of this garden.", status: 403 }
+      flash[:error] = "You are not part of this garden."
+      redirect_to gardens_path
     end
 
   end
