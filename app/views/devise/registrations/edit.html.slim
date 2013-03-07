@@ -10,6 +10,8 @@
     div data-role="fieldcontain"
       = f.input :email, required: true
     div data-role="fieldcontain"
+      = f.input :current_password, :required => true
+    div data-role="fieldcontain"
       = f.input :password
     div data-role="fieldcontain" 
       = f.input :password_confirmation
