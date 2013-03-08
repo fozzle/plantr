@@ -10,7 +10,21 @@
 #
 
 class Sensor < ActiveRecord::Base
+  before_create :generate_id
+
   self.primary_key = :sens_id
 
   has_one :plant
+
+  private
+
+  def generate_id
+    require 'securerandom'
+
+    begin
+      id = SecureRandom.urlsafe_base64(8)
+    end while Sensor.where(:sens_id => id).exists?
+    
+    self.id = id
+  end
 end
