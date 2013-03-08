@@ -1,6 +1,6 @@
 Plantr::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
   mount ApiTaster::Engine => "/api_taster" if Rails.env.development?
 
   # root :to => "users#index"

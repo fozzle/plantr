@@ -10,11 +10,9 @@
     div data-role="fieldcontain"
       = f.input :email, required: true
     div data-role="fieldcontain"
-      = f.input :current_password, :required => true
-    div data-role="fieldcontain"
-      = f.input :password
+      = f.input :password, label: 'New Password'
     div data-role="fieldcontain" 
-      = f.input :password_confirmation
+      = f.input :password_confirmation, label: 'Password Confirmation'
     fieldset.ui-grid-a
       .ui-block-a
         = f.button :submit, "Update"
