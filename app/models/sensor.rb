@@ -10,8 +10,7 @@
 #
 
 class Sensor < ActiveRecord::Base
-  has_one :plants
-  has_many :logs
-  attr_accessible :description, :name, :plant_id
+  self.primary_key = :sens_id
 
+  has_one :plant
 end
