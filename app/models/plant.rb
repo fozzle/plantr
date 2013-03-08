@@ -14,8 +14,21 @@
 
 class Plant < ActiveRecord::Base
   belongs_to :garden
-  belongs_to :sensor, :foreign_key => :sens_id
+  belongs_to :sensor
   has_many :logs
 
+  validate :sensor_id_exists
+
   attr_accessible :name, :garden_id, :sensor_id
+
+  private
+
+  def sensor_id_exists
+    begin
+      Sensor.find(self.sensor_id)
+    rescue ActiveRecord::RecordNotFound
+      errors.add(:sensor_id, "Sorry, we couldn't find that sensor.")
+      false
+    end
+  end
 end
