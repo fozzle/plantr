@@ -1,17 +1,11 @@
 class PlantsController < ApplicationController
+  load_and_authorize_resource :garden
   layout 'garden'
   before_filter :authenticate_user!
 
 	def index
     @garden = Garden.find(params[:garden_id])
-    
-    if @garden.has_user(current_user)
-  		@plants = @garden.plants.all
-    else
-      flash[:error] = "You are not part of this garden."
-      redirect_to gardens_path
-    end
-
+  	@plants = @garden.plants.all
   end
 
   def show

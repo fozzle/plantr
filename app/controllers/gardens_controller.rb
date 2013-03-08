@@ -1,4 +1,5 @@
 class GardensController < ApplicationController
+  load_and_authorize_resource
   layout 'home'
   before_filter :authenticate_user!
   
@@ -7,12 +8,9 @@ class GardensController < ApplicationController
   end
 
   def new
-    @garden = Garden.new
   end
 
   def edit
-    @garden = Garden.find(params[:id])
-
     render :layout => 'garden'
   end
 
