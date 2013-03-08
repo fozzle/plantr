@@ -18,7 +18,7 @@ html
     link rel="apple-touch-icon-precomposed" sizes="72x72"   href="touch-icons/apple-touch-icon-72x72.png"
     link rel="apple-touch-icon-precomposed" sizes="57x57"   href="touch-icons/apple-touch-icon-57x57.png"
   body
-    div data-role="page"
+    div data-role="page" data-url="#{yield(:current_url)}"
       - if content_for?(:header_content)
         div data-role="header" data-position="fixed" data-id="header"
           = yield :header_content

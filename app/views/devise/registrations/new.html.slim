@@ -1,3 +1,4 @@
+- content_for :current_url, registration_path(resource_name)
 - content_for :title, "Register"
 - content_for :header_content do
   = link_to "Back", new_user_session_path, data: { direction: 'reverse' }

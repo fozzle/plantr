@@ -18,6 +18,7 @@ class Plant < ActiveRecord::Base
   has_many :logs
 
   validate :sensor_id_exists
+  validates_uniqueness_of :sensor_id
 
   attr_accessible :name, :garden_id, :sensor_id
 
