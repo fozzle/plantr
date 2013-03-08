@@ -13,6 +13,7 @@ gem 'api_taster', :git => 'git://github.com/adamlutz/api_taster'
 
 # Devise authentication
 gem 'devise'
+gem 'cancan'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -25,6 +26,8 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
+
+gem 'quiet_assets', :group => :development
 
 gem 'slim'
 gem 'simple_form'
