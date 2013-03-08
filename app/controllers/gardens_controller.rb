@@ -12,6 +12,8 @@ class GardensController < ApplicationController
 
   def edit
     @garden = Garden.find(params[:id])
+
+    render :layout => 'garden'
   end
 
   def create

@@ -2,7 +2,7 @@
 - content_for :header_content do
   = link_to "Back", gardens_path, class: 'ui-btn-left', data: { direction: 'reverse' }
   h1 = content_for(:title)
-  = link_to "Add", new_garden_plant_path, class: 'ui-btn-right'
+  = link_to "Add", new_garden_plant_path, class: 'ui-btn-right', data: { transition: 'slidedown' }
 
 ul data-role="listview" data-inset="true"
   - if not @plants.empty?
