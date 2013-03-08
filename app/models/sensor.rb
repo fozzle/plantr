@@ -14,7 +14,7 @@ class Sensor < ActiveRecord::Base
 
   self.primary_key = :sens_id
 
-  has_one :plant
+  has_one :plant, :dependent => :destroy
 
   private
 

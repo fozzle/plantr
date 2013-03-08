@@ -35,6 +35,8 @@ gem 'jquery-rails', '= 2.1.4'
 gem 'jquery_mobile_rails'
 gem 'jquery_mobile_fa_rails'
 
+gem 'foreigner'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

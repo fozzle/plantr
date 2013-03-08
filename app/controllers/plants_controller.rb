@@ -20,19 +20,14 @@ class PlantsController < ApplicationController
     if @garden.has_user(current_user)
     	@plant = Plant.find(params[:id])
 
-      if @garden.has_plant(@plant)
-        respond_to do |format|
-
-          format.json { render json: @plant }
-        end
-      else
-        render json: { error: "Bad Request. Plant of id #{params[:id]} is not part of garden with id #{params[:garden_id]}.", status: 422}
+      unless @garden.has_plant(@plant)
+        flash[:error] = "That plant doesn't belong in that garden."
+        redirect_to garden_plants_path
       end
-
     else
-      render json: { error: "You are not part of this garden.", status: 403 }
+      flash[:error] = "You are not part of this garden."
+      redirect_to gardens_path
     end
-
   end
 
   def new
@@ -47,16 +42,15 @@ class PlantsController < ApplicationController
       params[:plant] = params[:plant].merge(garden_id: params[:garden_id])
       @plant = Plant.new(params[:plant])
 
-      respond_to do |format|
-        if @plant.save
-          format.json { render json: @plant, status: :created, location: garden_plants_url(@garden) }
-        else
-          format.json { render json: @plant.errors, status: :unprocessable_entity }
-        end
+      if @plant.save
+        flash[:success] = "You've added your plant! The sensor will start logging its health."
+        redirect_to garden_plants_path(@garden)
+      else
+        render :action => 'new'
       end
-
     else
-      render json: { error: "You are not part of this garden.", status: 403}
+      flash[:error] = "You are not a part of this garden."
+      redirect_to gardens_path
     end
   end
 

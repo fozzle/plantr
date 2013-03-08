@@ -10,7 +10,7 @@
 
 class Garden < ActiveRecord::Base
 	has_and_belongs_to_many :users
-	has_many :plants
+	has_many :plants, :dependent => :delete_all
   attr_accessible :name, :zip_code
 
   validates_presence_of :name

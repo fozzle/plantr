@@ -13,9 +13,9 @@
 #
 
 class Plant < ActiveRecord::Base
-	belongs_to :garden
-	belongs_to :sensor
-	has_many :logs
+  belongs_to :garden
+  belongs_to :sensor, :foreign_key => :sens_id
+  has_many :logs
 
   attr_accessible :name, :garden_id, :sensor_id
 end

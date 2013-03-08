@@ -1,7 +1,7 @@
 = simple_form_for @garden do |f|
   = f.error_notification
   div data-role="fieldcontain"
-    = f.input :name, placeholder: 'e.g. My House', required: true, wrapper: false
+    = f.input :name, placeholder: 'e.g. My House', required: true, wrapper: false, autofocus: true
   div data-role="fieldcontain"
     = f.input :zip_code, placeholder: 'e.g. 12345-1234, for weather forecasts', wrapper: false
   .ui-grid-solo
