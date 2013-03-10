@@ -17,15 +17,10 @@ Plantr::Application.routes.draw do
       post ':id/members' => "gardens#add_member"
       delete ':id/members' => "gardens#remove_member"
     end
-    resources :plants do
-      # resources :logs
-    end
+    resources :plants, :only => [:index, :new, :create]
   end
 
-  resources :logs
-
-  #match '*all' => 'application#cor', :constraints => {:method => 'OPTIONS'}
-
+  resources :plants, :except => [:index, :new, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
