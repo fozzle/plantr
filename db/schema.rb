@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308204642) do
+ActiveRecord::Schema.define(:version => 20130310204509) do
 
   create_table "gardens", :force => true do |t|
     t.string   "name"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(:version => 20130308204642) do
   end
 
   create_table "logs", :force => true do |t|
-    t.integer  "sunlight"
-    t.integer  "moisture"
-    t.integer  "temperature"
+    t.float    "sunlight"
+    t.float    "moisture"
+    t.float    "temperature"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "plant_id"

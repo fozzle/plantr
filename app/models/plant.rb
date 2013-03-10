@@ -21,7 +21,7 @@ class Plant < ActiveRecord::Base
   validates_uniqueness_of :sensor_id
 
   attr_accessor :clear_logs
-  attr_accessible :name, :garden_id, :sensor_id, :clear_logs
+  attr_accessible :name, :sensor_id, :clear_logs
 
   private
 
