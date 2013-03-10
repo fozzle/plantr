@@ -40,6 +40,8 @@ gem 'jquery_mobile_fa_rails'
 
 gem 'foreigner'
 
+gem 'barometer'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

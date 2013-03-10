@@ -4,13 +4,12 @@
   	= f.input :sensor_id, label: 'Sensor Tag', required: true, autofocus: true
   div data-role="fieldcontain"
     = f.input :name, placeholder: 'e.g. Carrots', required: true, wrapper: false
-  div data-role="fieldcontain"
-    = f.input :reset, :as => :boolean, label: 'Clear Logs', wrapper: false
-  - if @plant.new_record?
-    fieldset.ui-grid-solo
-      .ui-block-a
+  - unless @plant.new_record?
+    div data-role="fieldcontain"
+      = f.input :clear_logs, :as => :boolean, wrapper: false
+  fieldset.ui-grid-solo
+    .ui-block-a
+      - if @plant.new_record?
         = f.button :submit, "Add"
-  - else
-    fieldset.ui-grid-solo
-      .ui-block-a
+      - else
         = f.button :submit, "Update"

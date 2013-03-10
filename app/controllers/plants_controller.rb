@@ -50,6 +50,8 @@ class PlantsController < ApplicationController
     authorize! :manage, @plant
 
     if @plant.update_attributes(params[:plant])
+      @plant.logs.destroy_all if @plant.clear_logs
+
       flash[:success] = "You've updated your plant!"
       redirect_to plant_path(@plant)
     else
