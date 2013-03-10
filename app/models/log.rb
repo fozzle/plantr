@@ -12,6 +12,8 @@
 #
 
 class Log < ActiveRecord::Base
-	belongs_to :sensor
-  attr_accessible :moisture, :sunlight, :temperature, :sensor_id, :timestamp
+  belongs_to :plant
+  attr_accessible :moisture, :sunlight, :temperature, :plant_id
+
+  validates_presence_of :moisture, :sunlight, :temperature
 end
