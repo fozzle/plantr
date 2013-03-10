@@ -4,13 +4,13 @@
   	= f.input :sensor_id, label: 'Sensor Tag', required: true, autofocus: true
   div data-role="fieldcontain"
     = f.input :name, placeholder: 'e.g. Carrots', required: true, wrapper: false
+  div data-role="fieldcontain"
+    = f.input :reset, :as => :boolean, label: 'Clear Logs', wrapper: false
   - if @plant.new_record?
     fieldset.ui-grid-solo
       .ui-block-a
         = f.button :submit, "Add"
   - else
-    fieldset.ui-grid-a
+    fieldset.ui-grid-solo
       .ui-block-a
         = f.button :submit, "Update"
-      .ui-block-b
-        = f.button :submit, "Reassign"

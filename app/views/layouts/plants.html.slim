@@ -1,0 +1,10 @@
+- content_for :footer_content do
+  div data-role="navbar"
+    ul
+      li = nav_link 'Logs', plant_path(@plant)
+      li = nav_link 'Settings', edit_plant_path(@plant)
+
+- content_for :content do
+  = yield
+
+= render :template => 'layouts/application'

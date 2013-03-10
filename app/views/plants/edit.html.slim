@@ -1,0 +1,6 @@
+- content_for :title, @plant.name
+- content_for :header_content do
+  = link_to "Cancel", plant_path(@plant), class: 'ui-btn-left', data: { direction: 'reverse' }
+  h1 = content_for(:title)
+
+= render 'form'

@@ -1,0 +1,13 @@
+- content_for :title, @plant.name
+- content_for :header_content do
+  = link_to "Back", garden_plants_path(@plant.garden.id), class: 'ui-btn-left', data: { direction: 'reverse' }
+  h1 = content_for(:title)
+
+ul data-role="listview" data-inset="true"
+  - if not @plant.logs.empty?
+    - @plant.logs.each do |log|
+      li
+        | hi
+  - else
+    li
+      |  Nothing's been logged yet!

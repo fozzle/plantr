@@ -1,7 +1,7 @@
 class GardensController < ApplicationController
+  before_filter :authenticate_user!
   load_and_authorize_resource
   layout 'home'
-  before_filter :authenticate_user!
   
   def index
     @gardens = current_user.gardens

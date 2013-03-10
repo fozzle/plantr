@@ -8,7 +8,7 @@ ul data-role="listview" data-inset="true"
   - if not @plants.empty?
     - @plants.each do |plant|
       li
-        = link_to garden_plant_path(@garden, plant) do
+        = link_to plant_path(plant) do
           = plant.name
   - else
     li

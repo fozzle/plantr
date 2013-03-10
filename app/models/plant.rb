@@ -20,7 +20,8 @@ class Plant < ActiveRecord::Base
   validate :sensor_id_exists
   validates_uniqueness_of :sensor_id
 
-  attr_accessible :name, :garden_id, :sensor_id
+  attr_accessor :reset
+  attr_accessible :name, :garden_id, :sensor_id, :reset
 
   private
 

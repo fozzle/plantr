@@ -1,89 +1,70 @@
 class PlantsController < ApplicationController
-  load_and_authorize_resource :garden
-  layout 'garden'
   before_filter :authenticate_user!
+  layout 'garden'
 
-	def index
+  def index
     @garden = Garden.find(params[:garden_id])
-  	@plants = @garden.plants.all
+    @plants = @garden.plants.all
+
+    authorize! :manage, @garden
   end
 
   def show
-    @garden = Garden.find(params[:garden_id])
+    @plant = Plant.find(params[:id])
+    authorize! :read, @plant
 
-    if @garden.has_user(current_user)
-    	@plant = Plant.find(params[:id])
-
-      unless @garden.has_plant(@plant)
-        flash[:error] = "That plant doesn't belong in that garden."
-        redirect_to garden_plants_path
-      end
-    else
-      flash[:error] = "You are not part of this garden."
-      redirect_to gardens_path
-    end
+    render :layout => 'plants'
   end
 
   def new
     @garden = Garden.find(params[:garden_id])
+
+    authorize! :manage, @garden
     @plant = @garden.plants.build
   end
 
   def create
     @garden = Garden.find(params[:garden_id])
+    authorize! :manage, @garden
 
-    if @garden.has_user(current_user)
-      params[:plant] = params[:plant].merge(garden_id: params[:garden_id])
-      @plant = Plant.new(params[:plant])
+    params[:plant] = params[:plant].merge(garden_id: params[:garden_id])
+    @plant = Plant.new(params[:plant])
 
-      if @plant.save
-        flash[:success] = "You've added your plant! The sensor will start logging its health."
-        redirect_to garden_plants_path(@garden)
-      else
-        render :action => 'new'
-      end
+    if @plant.save
+      flash[:success] = "You've added your plant! The sensor will start logging its health."
+      redirect_to garden_plants_path(@garden)
     else
-      flash[:error] = "You are not a part of this garden."
-      redirect_to gardens_path
+      render :action => 'new'
     end
+  end
+
+  def edit
+    @plant = Plant.find(params[:id])
+    authorize! :edit, @plant
+
+    render :layout => 'plants'
   end
 
   def update
-    @garden = Garden.find(params[:garden_id])
+    @plant = Plant.find(params[:id])
+    authorize! :manage, @plant
 
-    if @garden.has_user(current_user)
-      @plant = Plant.find(params[:id])
-
-      respond_to do |format|
-        if @plant.update_attributes(params[:plant])
-          format.json { head :no_content }
-        else
-          format.json { render json: @plant.errors, status: :unprocessable_entity }
-        end
-      end
-
+    if @plant.update_attributes(params[:plant])
+      flash[:success] = "You've updated your plant!"
+      redirect_to plant_path(@plant)
     else
-      render json: { error: "You are not part of this garden.", status: 403 }
+      render :action => 'edit'
     end
   end
 
-  # DELETE /plants/1
-  # DELETE /plants/1.json
   def destroy
-    @garden = Garden.find(params[:garden_id])
+    @plant = Plant.find(params[:id])
+    @garden = @plant.garden
 
-    if @garden.has_user(current_user)
+    authorize! :destroy, @plant
+    @plant.destroy
 
-      @plant = Plant.find(params[:id])
-      @plant.destroy
-
-      respond_to do |format|
-        format.json { head :no_content }
-      end
-
-    else
-      render json: { error: "You are not part of this garden.", status: 403 }
-    end
+    redirect_to garden_plants_path(@garden)
   end
 
   def logs
