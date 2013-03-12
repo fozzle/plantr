@@ -4,10 +4,9 @@
     = f.input :name, placeholder: 'e.g. My House', required: true, wrapper: false, autofocus: true
   div data-role="fieldcontain"
     = f.input :zip_code, placeholder: 'e.g. 12345-1234, for weather forecasts', wrapper: false
-  .ui-grid-solo
+  fieldset.ui-grid-a
     .ui-block-a
       = f.submit
-  - unless @garden.new_record?
-    .ui-grid-solo
-      .ui-block-a
-        = link_to 'Delete', @garden, :method => :delete, data: { role: 'button' }
+    - unless @garden.new_record?
+      .ui-block-b
+        = link_to 'Delete', @garden, :method => :delete, data: { role: 'button', theme: 'd' }

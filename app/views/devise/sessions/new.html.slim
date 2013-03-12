@@ -13,6 +13,6 @@
     = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
   fieldset.ui-grid-a
     .ui-block-a
-      = f.submit "Login"
+      = f.submit "Login", data: { theme: 'c' }
     .ui-block-b
-      = link_to "Sign Up", new_user_registration_path, data: { role: 'button' }
+      = link_to "Sign Up", new_user_registration_path, data: { role: 'button', theme: 'd' }

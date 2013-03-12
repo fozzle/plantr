@@ -9,8 +9,8 @@
 #
 
 class Garden < ActiveRecord::Base
-	has_and_belongs_to_many :users
-	has_many :plants, :dependent => :delete_all
+  has_and_belongs_to_many :users
+  has_many :plants, :dependent => :delete_all
   attr_accessible :name, :zip_code
 
   validates_presence_of :name
@@ -20,15 +20,15 @@ class Garden < ActiveRecord::Base
             :allow_blank => true
 
   def to_s
-  	name
+    name
   end
 
   def has_user(user)
-  	self.users.all.include?(user)
+    self.users.all.include?(user)
   end
 
   def has_plant(plant)
-  	self.plants.all.include?(plant)
+    self.plants.all.include?(plant)
   end
   
 end
