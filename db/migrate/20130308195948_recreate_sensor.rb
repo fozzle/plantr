@@ -3,7 +3,7 @@ class RecreateSensor < ActiveRecord::Migration
     drop_table :sensors
 
     create_table :sensors, {:id => false, :primary_key => :sens_id} do |t|
-      t.string :sens_id, :null => false
+      t.string :sens_id, :null => false, :unique => true
     end
 
     rename_column :logs, :sensor_id, :plant_id
