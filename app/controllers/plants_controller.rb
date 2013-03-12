@@ -27,8 +27,7 @@ class PlantsController < ApplicationController
     @garden = Garden.find(params[:garden_id])
     authorize! :manage, @garden
 
-    params[:plant] = params[:plant].merge(garden_id: params[:garden_id])
-    @plant = Plant.new(params[:plant])
+    @plant = @garden.plants.build(params[:plant])
 
     if @plant.save
       flash[:success] = "You've added your plant! The sensor will start logging its health."

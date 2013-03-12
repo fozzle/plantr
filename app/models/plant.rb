@@ -17,11 +17,12 @@ class Plant < ActiveRecord::Base
   belongs_to :sensor
   has_many :logs
 
-  validate :sensor_id_exists
-  validates_uniqueness_of :sensor_id
-
   attr_accessor :clear_logs
   attr_accessible :name, :sensor_id, :clear_logs
+
+  validates_presence_of :sensor_id, :name
+  validate :sensor_id_exists
+  validates_uniqueness_of :sensor_id
 
   private
 
@@ -29,7 +30,7 @@ class Plant < ActiveRecord::Base
     begin
       Sensor.find(self.sensor_id)
     rescue ActiveRecord::RecordNotFound
-      errors.add(:sensor_id, "Sorry, we couldn't find that sensor.")
+      errors.add(:sensor_id, "We couldn't find that sensor.")
       false
     end
   end
