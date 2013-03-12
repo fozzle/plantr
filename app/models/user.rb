@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :gardens
 
-  named_scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
+  scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
