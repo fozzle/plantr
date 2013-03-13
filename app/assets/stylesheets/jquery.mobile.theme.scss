@@ -9,11 +9,12 @@
 */
 
 $green: #7ebe32;
-$darkgreen: #45631c;
-$lightgreen: #add566;
+$darkgreen: mix(#000, $green, 50%);
+$lightgreen: mix(#fff, $green, 40%);
 $creme: mix(#fff, $green, 93%);
 $red: #da4a32;
-$lightred: mix(#fff, $red, 50%);
+$lightred: mix(#fff, $red, 10%);
+$darkred: mix(#000, $red, 10%);
 $yellow: #d3b600;
 $lightyellow: mix(#fff, $yellow, 50%);
 $white: #fff;
@@ -484,7 +485,7 @@ $white: #fff;
 }
 .ui-btn-hover-d {
     border: 1px solid       #aaa /*{d-bhover-border}*/;
-    background:             $red /*{d-bhover-background-color}*/;
+    background:             $lightred /*{d-bhover-background-color}*/;
     font-weight: bold;
     color:                  $white /*{d-bhover-color}*/;
     cursor: pointer;
@@ -497,7 +498,7 @@ $white: #fff;
 }
 .ui-btn-down-d {
     border: 1px solid       #aaa /*{d-bdown-border}*/;
-    background:             $lightred /*{d-bdown-background-color}*/;
+    background:             $darkred /*{d-bdown-background-color}*/;
     font-weight: bold;
     color:                  $white /*{d-bdown-color}*/;
 }
