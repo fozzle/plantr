@@ -15,11 +15,24 @@ $creme: mix(#fff, $green, 93%);
 $red: #da4a32;
 $lightred: mix(#fff, $red, 50%);
 $yellow: #d3b600;
+$lightyellow: mix(#fff, $yellow, 50%);
 $white: #fff;
 
 /* misc */
 .ui-icon-loading {
-  display: none !important;
+    background-image: url('ajax-loader.png') !important;
+    background-size: 46px 46px;
+    width:46px;
+    height:46px;
+    -webkit-transform: rotate(360deg);
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+}
+@-webkit-keyframes spin {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
 }
 
 
@@ -576,32 +589,20 @@ $white: #fff;
     color: #2489ce /*{e-body-link-active}*/;
 }
 .ui-btn-up-e {
-    border: 1px solid       #f4c63f /*{e-bup-border}*/;
-    background:             #fadb4e /*{e-bup-background-color}*/;
+    border: 1px solid       $yellow /*{e-bup-border}*/;
+    background:             $lightyellow /*{e-bup-background-color}*/;
     font-weight: bold;
     color:                  #222 /*{e-bup-color}*/;
-    background-image: -webkit-gradient(linear, left top, left bottom, from( #ffefaa /*{e-bup-background-start}*/), to( #ffe155 /*{e-bup-background-end}*/)); /* Saf4+, Chrome */
-    background-image: -webkit-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
-    background-image:    -moz-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* FF3.6 */
-    background-image:     -ms-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* IE10 */
-    background-image:      -o-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* Opera 11.10+ */
-    background-image:         linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/);
 }
 .ui-btn-up-e:visited,
 .ui-btn-up-e a.ui-link-inherit {
     color:                  #222 /*{e-bup-color}*/;
 }
 .ui-btn-hover-e {
-    border: 1px solid       #f2c43d /*{e-bhover-border}*/;
-    background:             #fbe26f /*{e-bhover-background-color}*/;
+    border: 1px solid       $yellow /*{e-bhover-border}*/;
+    background:             mix(#fff, $lightyellow, 50%) /*{e-bhover-background-color}*/;
     font-weight: bold;
     color:                  #111 /*{e-bhover-color}*/;
-    background-image: -webkit-gradient(linear, left top, left bottom, from( #fff5ba /*{e-bhover-background-start}*/), to( #fbdd52 /*{e-bhover-background-end}*/)); /* Saf4+, Chrome */
-    background-image: -webkit-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
-    background-image:    -moz-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* FF3.6 */
-    background-image:     -ms-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* IE10 */
-    background-image:      -o-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* Opera 11.10+ */
-    background-image:         linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/);
 }
 .ui-btn-hover-e:visited,
 .ui-btn-hover-e:hover,
@@ -610,15 +611,9 @@ $white: #fff;
 }
 .ui-btn-down-e {
     border: 1px solid       #f2c43d /*{e-bdown-border}*/;
-    background:             #fceda7 /*{e-bdown-background-color}*/;
+    background:             $yellow /*{e-bdown-background-color}*/;
     font-weight: bold;
     color:                  #111 /*{e-bdown-color}*/;
-    background-image: -webkit-gradient(linear, left top, left bottom, from( #f8d94c /*{e-bdown-background-start}*/), to( #fadb4e /*{e-bdown-background-end}*/)); /* Saf4+, Chrome */
-    background-image: -webkit-linear-gradient( #f8d94c /*{e-bdown-background-start}*/, #fadb4e /*{e-bdown-background-end}*/); /* Chrome 10+, Saf5.1+ */
-    background-image:    -moz-linear-gradient( #f8d94c /*{e-bdown-background-start}*/, #fadb4e /*{e-bdown-background-end}*/); /* FF3.6 */
-    background-image:     -ms-linear-gradient( #f8d94c /*{e-bdown-background-start}*/, #fadb4e /*{e-bdown-background-end}*/); /* IE10 */
-    background-image:      -o-linear-gradient( #f8d94c /*{e-bdown-background-start}*/, #fadb4e /*{e-bdown-background-end}*/); /* Opera 11.10+ */
-    background-image:         linear-gradient( #f8d94c /*{e-bdown-background-start}*/, #fadb4e /*{e-bdown-background-end}*/);
 }
 .ui-btn-down-e:visited,
 .ui-btn-down-e:hover,
@@ -876,10 +871,6 @@ a.ui-link-inherit {
   -webkit-border-radius: 10px;
 }
 /* loading icon */
-.ui-icon-loading {
-    background: url(ajax-loader.gif);
-    background-size: 46px 46px;
-}
 /* Button corner classes
 -----------------------------------------------------------------------------------------------------------*/
 .ui-btn-corner-tl {
@@ -1056,7 +1047,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-loader-verbose { width: 200px; filter: Alpha(Opacity=88); opacity: .88; box-shadow: 0 1px 1px -1px #fff; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
 .ui-loader-default h1 { display: none; font-size: 16px; margin: 0; text-align: center; position: absolute; bottom: 0; left: 0; right: 0; margin-bottom: 5px; }
 .ui-loader-verbose h1 { font-size: 16px; margin: 0; text-align: center; }
-.ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 44px; height: 44px; padding: 1px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
+.ui-loader .ui-icon { display: block; margin: 0; width: 44px; height: 44px; position: absolute; top: 50%; left: 50%; margin-top: -22px; margin-left: -22px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
 .ui-loader-verbose .ui-icon { margin: 0 auto 10px; filter: Alpha(Opacity=75); opacity: .75; }
 .ui-loader-textonly { padding: 15px; margin-left: -115px; }
 .ui-loader-textonly .ui-icon { display: none; }
