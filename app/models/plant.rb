@@ -13,6 +13,10 @@
 #
 
 class Plant < ActiveRecord::Base
+  before_save :set_health
+
+  HEALTH_STATES = [:good, :fair, :bad]
+
   belongs_to :garden
   belongs_to :sensor
   has_many :logs
@@ -24,21 +28,11 @@ class Plant < ActiveRecord::Base
   validate :sensor_id_exists
   validates_uniqueness_of :sensor_id
 
-  def health
-    last_log = self.logs.last
+  scope :order_by_urgency, order('health DESC, updated_at DESC')
 
-    return :good if last_log.nil?
-
-    moisture = last_log.moisture
-    sunlight = last_log.sunlight
-
-    if moisture >= 0.7
-      :good
-    elsif moisture < 0.7 and moisture >= 0.5
-      :fair
-    else
-      :bad
-    end
+  def status
+    health ||= 0
+    HEALTH_STATES[health]
   end
 
   private
@@ -49,6 +43,26 @@ class Plant < ActiveRecord::Base
     rescue ActiveRecord::RecordNotFound
       errors.add(:sensor_id, "We couldn't find that sensor.")
       false
+    end
+  end
+
+  def set_health
+    last_log = self.logs.last
+
+    if last_log.nil?
+      self.health = 0
+      return
+    end
+
+    moisture = last_log.moisture
+    sunlight = last_log.sunlight
+
+    if moisture >= 0.7
+      self.health = 0
+    elsif moisture < 0.7 and moisture >= 0.5
+      self.health = 1
+    else
+      self.health = 2
     end
   end
 end

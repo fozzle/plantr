@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130310204509) do
+ActiveRecord::Schema.define(:version => 20130313162827) do
 
   create_table "gardens", :force => true do |t|
     t.string   "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20130310204509) do
     t.integer  "plant_type_id"
     t.date     "plant_date"
     t.string   "sensor_id"
+    t.integer  "health"
   end
 
   add_index "plants", ["sensor_id"], :name => "index_plants_on_sensor_id", :unique => true
