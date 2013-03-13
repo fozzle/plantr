@@ -13,7 +13,8 @@
 #
 
 class Plant < ActiveRecord::Base
-  before_save :set_health
+  after_initialize :set_default
+  after_touch :set_health
 
   HEALTH_STATES = [:good, :fair, :bad]
 
@@ -64,5 +65,9 @@ class Plant < ActiveRecord::Base
     else
       self.health = 2
     end
+  end
+
+  def :set_default
+    self.health ||= 0
   end
 end
