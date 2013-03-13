@@ -28,6 +28,8 @@ class UsersController < ApplicationController
       render :action => 'new'
     elsif not @user.nil?
       @garden.users << @user
+
+      flash[:success] = "Saved!"
       redirect_to garden_users_path(@garden)
     else
       @user = User.new

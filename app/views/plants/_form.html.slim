@@ -7,9 +7,10 @@
   - unless @plant.new_record?
     div data-role="fieldcontain"
       = f.input :clear_logs, :as => :boolean, wrapper: false
-  fieldset.ui-grid-a
+  .ui-grid-solo
     .ui-block-a
       = f.submit
-    - unless @plant.new_record?
-      .ui-block-b
+  - unless @plant.new_record?
+    .ui-grid-solo
+      .ui-block-a
         = link_to 'Delete', @plant, :method => :delete, data: { role: 'button', theme: 'd' }

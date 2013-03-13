@@ -29,7 +29,16 @@ class GardensController < ApplicationController
     @garden = Garden.find(params[:id])
 
     if @garden.has_user(current_user)
-      if @garden.update_attributes(params[:garden])
+      if params[:garden].include? :user_ids
+        params[:garden][:user_ids].each do |user_id|
+          next if user_id.empty?
+          user = User.find(user_id)
+          @garden.users.delete(user)
+        end
+        
+        flash[:success] = "Saved!"
+        redirect_to garden_users_path(@garden)
+      elsif @garden.update_attributes(params[:garden])
         flash[:success] = "Saved!"
         redirect_to garden_plants_path(@garden)
       else

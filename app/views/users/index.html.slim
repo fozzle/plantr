@@ -4,11 +4,17 @@
   h1 = content_for(:title)
   = link_to "Add", new_garden_user_path, class: 'ui-btn-right'
 
-ul data-role="listview" data-inset="true"
-  - if not @users.empty?
-    - @users.each do |user|
-      li
-        = user.username
-  - else
+- if not @users.empty?
+  = simple_form_for @garden do |f|
+    = hidden_field_tag "garden[user_ids][]", nil
+    fieldset data-role="controlgroup"
+      - @users.each do |user|
+        = check_box_tag "garden[user_ids][]", user.id, false, :id => "user_#{user.id}"
+        = label_tag "user_#{user.id}", user.username
+    .ui-grid-solo
+      .ui-block-a
+        = f.button :submit, "Delete Selected", data: { theme: 'd' }
+- else
+  ul data-role="listview" data-inset="true"
     li
       = link_to "Add another member!", new_garden_user_path(@garden)

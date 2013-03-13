@@ -13,8 +13,9 @@
       = f.input :password, label: 'New Password'
     div data-role="fieldcontain" 
       = f.input :password_confirmation, label: 'Password Confirmation'
-    fieldset.ui-grid-a
+    .ui-grid-solo
       .ui-block-a
         = f.button :submit, "Update"
-      .ui-block-b
+    .ui-grid-solo
+      .ui-block-a
         = link_to 'Sign Out', destroy_user_session_path, :data => { role: 'button', theme: 'd' }
