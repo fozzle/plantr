@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(:version => 20130313162827) do
     t.string "sens_id", :null => false
   end
 
+  add_index "sensors", ["sens_id"], :name => "index_sensors_on_sens_id", :unique => true
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
