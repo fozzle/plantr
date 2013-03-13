@@ -16,4 +16,5 @@ class Log < ActiveRecord::Base
   attr_accessible :moisture, :sunlight, :temperature, :plant_id
 
   validates_presence_of :moisture, :sunlight, :temperature
+
 end
