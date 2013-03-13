@@ -30,6 +30,7 @@ class GardensController < ApplicationController
 
     if @garden.has_user(current_user)
       if @garden.update_attributes(params[:garden])
+        flash[:success] = "Saved!"
         redirect_to garden_plants_path(@garden)
       else
         render :action => 'edit'

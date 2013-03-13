@@ -24,6 +24,23 @@ class Plant < ActiveRecord::Base
   validate :sensor_id_exists
   validates_uniqueness_of :sensor_id
 
+  def health
+    last_log = self.logs.last
+
+    return :good if last_log.nil?
+
+    moisture = last_log.moisture
+    sunlight = last_log.sunlight
+
+    if moisture >= 0.7
+      :good
+    elsif moisture < 0.7 and moisture >= 0.5
+      :fair
+    else
+      :bad
+    end
+  end
+
   private
 
   def sensor_id_exists

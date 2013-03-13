@@ -51,7 +51,7 @@ class PlantsController < ApplicationController
     if @plant.update_attributes(params[:plant])
       @plant.logs.destroy_all if @plant.clear_logs
 
-      flash[:success] = "You've updated your plant!"
+      flash[:success] = "Saved!"
       redirect_to plant_path(@plant)
     else
       render :action => 'edit'
