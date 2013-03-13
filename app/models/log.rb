@@ -15,5 +15,5 @@ class Log < ActiveRecord::Base
   belongs_to :plant, :touch => true
   attr_accessible :moisture, :sunlight, :temperature, :plant_id
 
-  validates_presence_of :moisture, :sunlight, :temperature
+  # validates_presence_of :moisture, :sunlight
 end

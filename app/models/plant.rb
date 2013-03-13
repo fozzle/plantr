@@ -15,8 +15,7 @@
 class Plant < ActiveRecord::Base
   after_initialize :set_default
   after_touch :set_health
-
-  HEALTH_STATES = [:good, :fair, :bad]
+  after_save :send_notification
 
   belongs_to :garden
   belongs_to :sensor
@@ -30,11 +29,6 @@ class Plant < ActiveRecord::Base
   validates_uniqueness_of :sensor_id
 
   scope :order_by_urgency, order('health DESC, updated_at DESC')
-
-  def status
-    health ||= 0
-    HEALTH_STATES[health]
-  end
 
   private
 
@@ -51,7 +45,7 @@ class Plant < ActiveRecord::Base
     last_log = self.logs.last
 
     if last_log.nil?
-      self.health = 0
+      self.health = :good
       return
     end
 
@@ -59,15 +53,25 @@ class Plant < ActiveRecord::Base
     sunlight = last_log.sunlight
 
     if moisture >= 0.7
-      self.health = 0
+      self.health = :good
     elsif moisture < 0.7 and moisture >= 0.5
-      self.health = 1
+      self.health = :fair
     else
-      self.health = 2
+      self.health = :bad
     end
   end
 
-  def set_default
-    self.health ||= 0
+  def send_notification
+    if self.health_changed?
+      if self.health_was == 'bad' and self.health != 'bad'
+        logger.debug self.health
+      elsif self.health_was != 'bad' and self.health == 'bad'
+        logger.debug self.health
+      end
+    end
+  end
+
+  def :set_default
+    self.health ||= 'good'
   end
 end

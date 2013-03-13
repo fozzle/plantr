@@ -3,11 +3,42 @@
   = link_to "Back", garden_plants_path(@plant.garden.id), class: 'ui-btn-left', data: { direction: 'reverse' }
   h1 = content_for(:title)
 
-ul data-role="listview" data-inset="true"
-  - if not @plant.logs.empty?
-    - @plant.logs.each do |log|
-      li
-        | hi
-  - else
+- if not @plant.logs.empty?
+  javascript:
+    $(document).bind("pageshow", function() {
+      $.jqplot('chart', [#{{@moisture_points}}, #{{@sunlight_points}}], {
+        seriesColors: ['#4aa2bb', '#d3b600'],
+        axes: {
+          xaxis: {
+            renderer: $.jqplot.DateAxisRenderer, 
+            tickOptions: {
+              formatString:'%b %#d',
+              fontFamily: 'Helvetica'
+            },
+            min: '#{@logs.first.created_at}',
+            tickInterval: '1 month'
+          }
+        },
+        grid: {
+          shadow: false
+        }
+      });
+    });
+  p
+    strong
+      | Last Update: 
+    span
+      | #{time_ago_in_words(@plant.updated_at)} ago
+  p
+    strong
+      | Moisture: 
+    span = number_to_percentage(@plant.logs.last.moisture, :precision => 0)
+  p
+    strong
+      | Light: 
+    span = number_to_percentage(@plant.logs.last.sunlight, :precision => 0)
+  #chart style="height: 300px; width: 100%; margin: 0 auto;"
+- else
+  ul data-role="listview" data-inset="true"
     li
       |  Nothing's been logged yet!
