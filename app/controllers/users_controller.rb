@@ -1,103 +1,50 @@
 class UsersController < ApplicationController
-  layout 'garden'
   before_filter :authenticate_user!
+  layout 'garden'
   
   def index
     @garden = Garden.find(params[:garden_id])
+    authorize! :manage, @garden
 
-    if @garden.has_user(current_user)
-      @users = @garden.users
-    else
-      flash[:error] = "You are not a part of this garden."
-    end
+    @users = @garden.users.without_user(current_user)
   end
 
   def new
-    @garden = Garden.new
-  end
+    @garden = Garden.find(params[:garden_id])
+    authorize! :manage, @garden
 
-  def edit
-    @garden = Garden.find(params[:id])
+    @user = User.new
   end
 
   def create
-    @garden = Garden.new(params[:garden])
+    @garden = Garden.find(params[:garden_id])
+    authorize! :manage, @garden
 
-    if @garden.save
-      @garden.users << current_user
-      redirect_to gardens_path
+    @user = User.find_by_username(params[:user][:username])
+
+    if @garden.users.include? @user
+      @user = User.new
+      flash[:error] = 'That user is already part of this garden.'
+      render :action => 'new'
+    elsif not @user.nil?
+      @garden.users << @user
+
+      flash[:success] = "Saved!"
+      redirect_to garden_users_path(@garden)
     else
+      @user = User.new
+      flash[:error] = 'User not found.'
       render :action => 'new'
     end
   end
 
-  def update
-    @garden = Garden.find(params[:id])
-
-    if @garden.has_user(current_user)
-      if @garden.update_attributes(params[:garden])
-        redirect_to garden_plants_path(@garden)
-      else
-        render :action => 'edit'
-      end
-    else
-      flash[:error] = "You are not a part of this garden."
-      redirect_to gardens_path
-    end
-  end
-
   def destroy
-    @garden = Garden.find(params[:id])
+    @garden = Garden.find(params[:garden_id])
+    @user = User.find(params[:id])
 
-    if @garden.has_user(current_user)
-      @garden.destroy
+    authorize! :manage, @garden
 
-      redirect_to gardens_path
-    else
-      flash[:error] = "You are not a part of this garden."
-      redirect_to gardens_path
-    end
-  end
-
-  def add_member
-    @garden = Garden.find(params[:id])
-
-    if @garden.has_user(current_user)
-      @user = User.find(params[:user_id])
-      if not @user.blank?
-        if not @garden.users.include?(@user)
-          @garden.users << User.find(params[:user_id])
-          @garden.save
-
-          respond_to do |format|
-            format.json { render json: @garden.users.all }
-          end
-
-        else
-          render json: { errors: "User has already been added.", status: 400}
-        end
-      end
-      
-    else
-      render json: { errors: "You are not part of this garden.", status: 403 }
-    end
-  end
-
-  def members
-    @garden = Garden.find(params[:id])
-    respond_to do |format|
-      format.json { render json: @garden.users.all }
-    end
-  end
-
-  def remove_member
-    @garden = Garden.find(params[:id])
-    @user = User.find(params[:user_id])
-    if @garden.has_user(current_user) and @user == current_user
-      @garden.users.delete(@user)
-      render json: @garden.users.all
-    else
-      render json: { errors: "You are not allowed to take this action.", status: 400 }
-    end
+    @garden.users.delete(@user)
+    redirect_to garden_users_path(@garden)
   end
 end

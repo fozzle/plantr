@@ -11,12 +11,7 @@ Plantr::Application.routes.draw do
   resources :sensors
 
   resources :gardens do
-    #resource :members
-    collection do
-      get ':id/members' => "gardens#members"
-      post ':id/members' => "gardens#add_member"
-      delete ':id/members' => "gardens#remove_member"
-    end
+    resources :users
     resources :plants, :only => [:index, :new, :create]
   end
 

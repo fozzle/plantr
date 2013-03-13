@@ -10,6 +10,10 @@ ul data-role="listview" data-inset="true"
       li
         = link_to plant_path(plant) do
           = plant.name
+          - if plant.logs.count > 0
+            p.ui-li-aside
+              strong
+                = time_ago_in_words(plant.updated_at) + ' ago'
   - else
     li
       = link_to "Add your first plant!", new_garden_plant_path(@garden)

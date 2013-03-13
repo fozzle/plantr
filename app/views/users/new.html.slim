@@ -1,0 +1,7 @@
+- content_for :current_url, new_garden_user_path
+- content_for :title, "Add a Member"
+- content_for :header_content do
+  = link_to "Cancel", garden_users_path(@garden), class: 'ui-btn-left', data: { direction: 'reverse' }
+  h1 = content_for(:title)
+
+= render 'form'
