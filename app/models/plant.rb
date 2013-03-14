@@ -17,7 +17,7 @@ class Plant < ActiveRecord::Base
   after_touch :set_health
   after_save :send_notification
 
-  HEALTH_STATES = [:good, :fair, :bad]
+  HEALTH_STATES = [:good, :fair, :bad, :overwatered]
 
   belongs_to :garden
   belongs_to :sensor
@@ -59,7 +59,9 @@ class Plant < ActiveRecord::Base
     moisture = last_log.moisture
     sunlight = last_log.sunlight
 
-    if moisture >= 0.5
+    if moisture >= 0.8
+      self.health = :overwatered
+    elsif moisture >= 0.5 and < 0.8
       self.health = :good
     elsif moisture < 0.5 and moisture >= 0.3
       self.health = :fair
