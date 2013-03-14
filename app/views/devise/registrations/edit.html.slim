@@ -1,3 +1,4 @@
+- content_for :current_url, edit_user_registration_path
 - content_for :title, "Your Profile"
 - content_for :header_content do
   h1 = content_for(:title)
@@ -9,6 +10,8 @@
       = f.input :username, required: true, autofocus: true
     div data-role="fieldcontain"
       = f.input :email, required: true
+    div data-role="fieldcontain"
+      = f.input :phone
     div data-role="fieldcontain"
       = f.input :password, label: 'New Password'
     div data-role="fieldcontain" 

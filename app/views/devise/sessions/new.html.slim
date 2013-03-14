@@ -5,12 +5,16 @@
 
 = simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
   = f.error_notification
-  div data-role="fieldcontain"
-    = f.input :login, label: 'Username or email', required: true, autofocus: true, placeholder: 'greenthumb7'
-  div data-role="fieldcontain"
-    = f.input :password, required: true
-  fieldset.ui-grid-a
+  #logo
+    = image_tag('logo.png')
+    h1
+      | Plantr
+  div.ui-hide-label.ui-input-no-border data-role="fieldcontain"
+    = f.input :login, label: 'Username or email', required: true, autofocus: true, placeholder: 'Username or email'
+  div.ui-hide-label data-role="fieldcontain"
+    = f.input :password, required: true, placeholder: 'Password'
+  .ui-grid-a
     .ui-block-a
-      = f.submit "Login", data: { theme: 'c' }
+      = f.submit "Login", data: { theme: 'b' }
     .ui-block-b
       = link_to "Sign Up", new_user_registration_path, data: { role: 'button', theme: 'd' }
