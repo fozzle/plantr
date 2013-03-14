@@ -20,6 +20,43 @@ $yellow: #d3b600;
 $lightyellow: mix(#fff, $yellow, 50%);
 $white: #fff;
 
+/* sprite sheet*/
+.plant .ui-li-aside {
+    margin: 0;
+}
+
+.plant .ui-link-inherit {
+    line-height: 43px;
+}
+
+.plant-status {
+    background: url(leaves.png) no-repeat;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.plant-status.good {
+    width: 32px;
+    height: 43px;
+    background-position: 0 -1px;
+    margin-bottom: -14px;
+}
+
+.plant-status.fair {
+    width: 32px;
+    height: 32px;
+    background-position: -38px -6px;
+    margin-bottom: -8px;
+}
+
+.plant-status.bad {
+    width: 32px;
+    height: 21px;
+    background-position: -38px -52px;
+    margin-bottom: -3px;
+}
+
+
 /* misc */
 .ui-icon-loading {
     background-image: url('ajax-loader.png') !important;

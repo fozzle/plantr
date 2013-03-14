@@ -7,7 +7,7 @@
 ul data-role="listview" data-inset="true"
   - if not @plants.empty?
     - @plants.each do |plant|
-      li
+      li.plant
         = link_to plant_path(plant) do
           span class="plant-status #{plant.health}"
           = plant.name
