@@ -17,6 +17,8 @@ Plantr::Application.routes.draw do
 
   resources :plants, :except => [:index, :new, :create]
 
+  resources :logs, :only => :create
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
