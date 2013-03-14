@@ -23,6 +23,10 @@
             title: {
                 text: 'Moisture and Light Over Time'
             },
+            credits: {
+                enabled: false
+            },
+            colors: ['#4aa2bb', '#d3b600', '#7ebe32'],
             xAxis: {
                 type: 'datetime'
             },
@@ -30,6 +34,9 @@
                 title: {
                     text: '% Exposure'
                 },
+            },
+            tooltip: {
+                enabled: false
             },
             series: [{
                 name: 'Moisture',
@@ -49,7 +56,7 @@
   p
     strong
       | Moisture: 
-    span = number_to_percentage(@plant.logs.last.moisture * 100, :precision => 0)
+    span = number_to_percentage(@plant.logs.last.moisture, :precision => 0)
   p
     strong
       | Light: 
