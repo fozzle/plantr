@@ -10,10 +10,11 @@ class LogsController < ApplicationController
   # end
 
   def create
-    @log = Log.new(params[:log])
+    sensor = Sensor.find(params[:sensor_id])
+    log = sensor.logs.build(params[:log])
     respond_to do |format|
-      if @log.save
-        format.json { render json: @log, status: :created, location: @log }
+      if log.save
+        format.json { render json: log, status: :created }
       else
         format.json { render json: @log.errors, status: :unprocessable_entity }
       end

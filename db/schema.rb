@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314001358) do
+ActiveRecord::Schema.define(:version => 20130313224451) do
 
   create_table "gardens", :force => true do |t|
     t.string   "name"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20130314001358) do
     t.float    "temperature"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "plant_id"
+    t.integer  "plant_id"
   end
 
   create_table "plant_types", :force => true do |t|
