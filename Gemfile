@@ -40,6 +40,7 @@ gem 'jquery_mobile_rails'
 gem 'jquery_mobile_fa_rails'
 
 gem 'foreigner'
+gem "font-awesome-rails"
 
 gem 'barometer'
 
