@@ -60,9 +60,9 @@ class Plant < ActiveRecord::Base
     sunlight = last_log.sunlight
 
     if moisture >= 0.5
-      self.health = 0
+      self.health = :good
     elsif moisture < 0.5 and moisture >= 0.3
-      self.health = 1
+      self.health = :fair
     else
       self.health = :bad
     end
