@@ -6,23 +6,25 @@
 - if not @plant.logs.empty?
   javascript:
     $(document).bind("pageshow", function() {
-      $.jqplot('chart', [#{{@moisture_points}}, #{{@sunlight_points}}], {
-        seriesColors: ['#4aa2bb', '#d3b600'],
-        axes: {
-          xaxis: {
-            renderer: $.jqplot.DateAxisRenderer, 
-            tickOptions: {
-              formatString:'%b %#d',
-              fontFamily: 'Helvetica'
-            },
-            min: '#{@logs.first.created_at}',
-            tickInterval: '1 month'
+      if ($('#chart').length > 0) {
+        $.jqplot('chart', [#{{@moisture_points}}, #{{@sunlight_points}}], {
+          seriesColors: ['#4aa2bb', '#d3b600'],
+          axes: {
+            xaxis: {
+              renderer: $.jqplot.DateAxisRenderer, 
+              tickOptions: {
+                formatString:'%b %#d',
+                fontFamily: 'Helvetica'
+              },
+              min: '#{@logs.first.created_at}',
+              tickInterval: '1 month'
+            }
+          },
+          grid: {
+            shadow: false
           }
-        },
-        grid: {
-          shadow: false
-        }
-      });
+        });
+      }
     });
   p
     strong
