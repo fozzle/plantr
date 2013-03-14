@@ -19,8 +19,33 @@ $darkred: mix(#000, $red, 10%);
 $yellow: #d3b600;
 $lightyellow: mix(#fff, $yellow, 50%);
 $white: #fff;
+$blue: #4aa2bb;
 
-/* sprite sheet*/
+.plant-info-block {
+    text-align: center;
+
+    .icon {
+        font-size: 50px;
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 50px;
+    }
+
+    &.time {
+        color: $lightred;
+    }
+
+    &.moisture {
+        color: $blue;
+    }
+
+    &.light {
+        color: $yellow;
+    }
+}
+
 .ui-footer .icon {
     font-size: 20px;
     margin: 0 auto;

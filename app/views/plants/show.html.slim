@@ -18,7 +18,8 @@
         });*/
         chart = new Highcharts.Chart({
             chart: {
-                renderTo: 'chart'
+                renderTo: 'chart',
+                backgroundColor: '#f5faf0'
             },
             title: {
                 text: 'Moisture and Light Over Time'
@@ -48,19 +49,18 @@
             }]
         });
     });
-  p
-    strong
-      | Last Update: 
-    span
-      | #{time_ago_in_words(@plant.updated_at)} ago
-  p
-    strong
-      | Moisture: 
-    span = number_to_percentage(@plant.logs.last.moisture/10, :precision => 0)
-  p
-    strong
-      | Light: 
-    span = number_to_percentage(@plant.logs.last.sunlight/10, :precision => 0)
+  span
+  .ui-grid-b
+    .ui-block-a.plant-info-block.time
+      i.icon-time.icon
+      p
+        | #{time_ago_in_words(@plant.updated_at)} ago
+    .ui-block-b.plant-info-block.moisture
+      i.icon-tint.icon
+      p = number_to_percentage(@plant.logs.last.moisture/10.0, :precision => 0)
+    .ui-block-c.plant-info-block.light
+      i.icon-lightbulb.icon
+      p = number_to_percentage(@plant.logs.last.sunlight/10.0, :precision => 0)
   #chart style="height: 300px; width: 100%; margin: 0 auto;"
 - else
   ul data-role="listview" data-inset="true"
