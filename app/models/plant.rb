@@ -71,9 +71,9 @@ class Plant < ActiveRecord::Base
   def send_notification
     twilio_sid = "AC3d33aec0094782093e058f29c5093856"
     twilio_token = "c7151b10ee5ad0318135974ad31e8cae"
-    twilio_phone_number = self.phone
+    twilio_phone_number = self.garden.phone
 
-    return if self.garden.phone.empty?
+    return if twilio_phone_number.empty?
 
     @twilio_client = Twilio::REST::Client.new twilio_sid, twilio_token
 
