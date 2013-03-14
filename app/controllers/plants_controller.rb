@@ -52,7 +52,14 @@ class PlantsController < ApplicationController
     @plant = Plant.find(params[:id])
     authorize! :manage, @plant
 
-    if @plant.update_attributes(params[:plant])
+    if params[:plant].include? :task_ids
+      params[:plant][:task_ids].each do |task_id|
+        Task.find(task_id).destroy unless task_id.empty?
+      end
+
+      flash[:success] = "Saved!"
+      redirect_to plant_tasks_path(@plant)
+    elsif @plant.update_attributes(params[:plant])
       @plant.logs.destroy_all if @plant.clear_logs
 
       flash[:success] = "Saved!"
