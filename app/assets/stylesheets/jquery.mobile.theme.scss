@@ -21,6 +21,29 @@ $lightyellow: mix(#fff, $yellow, 50%);
 $white: #fff;
 
 /* sprite sheet*/
+.ui-header .icon {
+    background: none;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+
+    .ui-btn-inner {
+        border: none !important;
+    }
+
+    i {
+        -webkit-transition: linear 0.3s all;
+        font-size: 22px !important;
+        line-height: 1;
+    }
+
+    &:active {
+        i {
+            text-shadow: 0 0 5px #fff;
+        }
+    }
+}
+
 .plant .ui-li-aside {
     margin: 0;
 }
@@ -189,7 +212,6 @@ $white: #fff;
 }
 .ui-btn-up-a {
     border: 1px solid       #cfcfcf /*{a-bup-border}*/;
-    background:             #333 /*{a-bup-background-color}*/;
     font-weight: bold;
     color:                  #111 /*{a-bup-color}*/;
     background-image: -webkit-gradient(linear, left top, left bottom, from( #fff /*{a-bup-background-start}*/), to( #fff /*{a-bup-background-end}*/)); /* Saf4+, Chrome */
