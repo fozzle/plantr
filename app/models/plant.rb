@@ -17,8 +17,6 @@ class Plant < ActiveRecord::Base
   after_touch :set_health
   after_save :send_notification
 
-  HEALTH_STATES = [:good, :fair, :bad, :overwatered]
-
   belongs_to :garden
   belongs_to :sensor
   has_many :logs
@@ -34,7 +32,6 @@ class Plant < ActiveRecord::Base
 
   def status
     health ||= 0
-    HEALTH_STATES[health]
   end
 
   private
