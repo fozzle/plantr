@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(:version => 20130314062339) do
     t.string "sens_id", :null => false
   end
 
+  add_index "sensors", ["sens_id"], :name => "index_sensors_on_sens_id", :unique => true
+
   create_table "tasks", :force => true do |t|
     t.string   "description"
     t.text     "schedule"
@@ -70,7 +72,6 @@ ActiveRecord::Schema.define(:version => 20130314062339) do
   end
 
   add_index "tasks", ["plant_id"], :name => "index_tasks_on_plant_id"
-  add_index "sensors", ["sens_id"], :name => "index_sensors_on_sens_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
