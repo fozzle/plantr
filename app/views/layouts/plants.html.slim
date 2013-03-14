@@ -1,8 +1,15 @@
 - content_for :footer_content do
   div data-role="navbar"
     ul
-      li = nav_link 'Logs', plant_path(@plant)
-      li = nav_link 'Settings', edit_plant_path(@plant)
+      li = nav_link plant_path(@plant) do
+        i.icon.icon-bar-chart
+        |  Logs
+      li = nav_link edit_plant_path(@plant) do
+        i.icon.icon-bell
+        |  Tasks
+      li = nav_link edit_plant_path(@plant) do
+        i.icon.icon-cogs
+        |  Settings
 
 - content_for :content do
   = yield

@@ -21,6 +21,11 @@ $lightyellow: mix(#fff, $yellow, 50%);
 $white: #fff;
 
 /* sprite sheet*/
+.ui-footer .icon {
+    font-size: 20px;
+    margin: 0 auto;
+    display: block;
+}
 .ui-header .icon {
     background: none;
     border: none !important;
