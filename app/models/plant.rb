@@ -61,7 +61,7 @@ class Plant < ActiveRecord::Base
 
     if moisture >= 0.8
       self.health = :overwatered
-    elsif moisture >= 0.5 and < 0.8
+    elsif moisture >= 0.5 and moisture < 0.8
       self.health = :good
     elsif moisture < 0.5 and moisture >= 0.3
       self.health = :fair
