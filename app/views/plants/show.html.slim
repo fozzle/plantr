@@ -6,25 +6,39 @@
 - if not @plant.logs.empty?
   javascript:
     $(document).bind("pageshow", function() {
-      if ($('#chart').length > 0) {
-        $.jqplot('chart', [#{{@moisture_points}}, #{{@sunlight_points}}], {
-          seriesColors: ['#4aa2bb', '#d3b600'],
-          axes: {
-            xaxis: {
-              renderer: $.jqplot.DateAxisRenderer, 
-              tickOptions: {
-                formatString:'%b %#d',
-                fontFamily: 'Helvetica'
-              },
-              min: '#{@logs.first.created_at}',
-              tickInterval: '1 month'
-            }
-          },
-          grid: {
-            shadow: false
-          }
+        var chart;
+        /*var logs = JSON.parse('#{@plant.logs.limit(360).to_json.html_safe}');
+        var moisture = [];
+        var sunlight = [];
+        logs.forEach(function(log) {
+            var created_at = log.created_at;
+            moisture.push({"created_at": created_at, "moisture": log.moisture});
+            sunlight.push({"created_at": created_at, "sunlight": log.sunlight});
+        });*/
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart'
+            },
+            title: {
+                text: 'Moisture and Light Over Time'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: '% Exposure'
+                },
+            },
+            series: [{
+                name: 'Moisture',
+                data: #{@moisture_points}
+            },
+            {
+                name: 'Sunlight',
+                data: #{@sunlight_points}
+            }]
         });
-      }
     });
   p
     strong
