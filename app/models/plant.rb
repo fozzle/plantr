@@ -30,17 +30,6 @@ class Plant < ActiveRecord::Base
 
   scope :order_by_urgency, order('health DESC, updated_at DESC')
 
-  private
-
-  def sensor_id_exists
-    begin
-      Sensor.find(self.sensor_id)
-    rescue ActiveRecord::RecordNotFound
-      errors.add(:sensor_id, "We couldn't find that sensor.")
-      false
-    end
-  end
-
   def set_health
     last_log = self.logs.last
 
@@ -60,6 +49,17 @@ class Plant < ActiveRecord::Base
       self.health = :fair
     else
       self.health = :bad
+    end
+  end
+
+  private
+
+  def sensor_id_exists
+    begin
+      Sensor.find(self.sensor_id)
+    rescue ActiveRecord::RecordNotFound
+      errors.add(:sensor_id, "We couldn't find that sensor.")
+      false
     end
   end
 

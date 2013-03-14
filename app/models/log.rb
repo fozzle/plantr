@@ -12,8 +12,16 @@
 #
 
 class Log < ActiveRecord::Base
+	after_create :update_plant
+
   belongs_to :plant, :touch => true
   attr_accessible :moisture, :sunlight, :temperature, :plant_id
 
   validates_presence_of :moisture, :sunlight, :temperature
+
+  private
+  	def update_plant
+  		self.plant.set_health
+  	end
+  	
 end
