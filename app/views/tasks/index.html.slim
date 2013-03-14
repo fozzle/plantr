@@ -1,0 +1,22 @@
+- content_for :title, @plant.name
+- content_for :header_content do
+  = link_to garden_plants_path(@plant.garden.id), class: 'icon ui-btn-left', data: { direction: 'reverse' } do
+    i.icon-arrow-left
+  h1 = content_for(:title)
+  = link_to new_plant_task_path(@plant), class: 'icon ui-btn-right' do
+    i.icon-plus
+
+- if not @tasks.empty?
+  = simple_form_for @plant do |f|
+    = hidden_field_tag "plant[task_ids][]", nil
+    fieldset data-role="controlgroup"
+      - @tasks.each do |task|
+        = check_box_tag "plant[task_ids][]", task.id, false, :id => "task_#{task.id}"
+        = label_tag "task_#{task.id}", task.description
+    .ui-grid-solo
+      .ui-block-a
+        = f.button :submit, "Delete Selected", data: { theme: 'd' }
+- else
+  ul data-role="listview" data-inset="true"
+    li
+      = link_to "Add a task!", new_plant_task_path(@plant)
