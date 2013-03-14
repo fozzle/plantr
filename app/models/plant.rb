@@ -73,7 +73,7 @@ class Plant < ActiveRecord::Base
     twilio_token = "c7151b10ee5ad0318135974ad31e8cae"
     twilio_phone_number = self.phone
 
-    return if self.phone.empty?
+    return if self.garden.phone.empty?
 
     @twilio_client = Twilio::REST::Client.new twilio_sid, twilio_token
 
