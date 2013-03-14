@@ -22,6 +22,8 @@ $white: #fff;
 $blue: #4aa2bb;
 
 .plant-info-block {
+    margin-top: 10px;
+
     text-align: center;
 
     .icon {
@@ -30,7 +32,7 @@ $blue: #4aa2bb;
 
     p {
         margin-top: 0;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
     }
 
     &.time {

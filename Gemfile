@@ -44,6 +44,8 @@ gem "font-awesome-rails"
 
 gem 'twilio-ruby'
 
+gem 'ice_cube'
+
 gem 'barometer'
 
 # To use ActiveModel has_secure_password
