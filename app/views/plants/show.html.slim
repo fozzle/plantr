@@ -7,46 +7,49 @@
 - if not @plant.logs.empty?
   javascript:
     $(document).bind("pageshow", function() {
-        var chart;
-        /*var logs = JSON.parse('#{@plant.logs.limit(360).to_json.html_safe}');
-        var moisture = [];
-        var sunlight = [];
-        logs.forEach(function(log) {
-            var created_at = log.created_at;
-            moisture.push({"created_at": created_at, "moisture": log.moisture});
-            sunlight.push({"created_at": created_at, "sunlight": log.sunlight});
-        });*/
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'chart'
-            },
-            title: {
-                text: 'Moisture and Light Over Time'
-            },
-            credits: {
-                enabled: false
-            },
-            colors: ['#4aa2bb', '#d3b600', '#7ebe32'],
-            xAxis: {
-                type: 'datetime'
-            },
-            yAxis: {
-                title: {
-                    text: '% Exposure'
+        if ($('chart').length) {
+            var chart;
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'chart'
                 },
-            },
-            tooltip: {
-                enabled: false
-            },
-            series: [{
-                name: 'Moisture',
-                data: #{@moisture_points}
-            },
-            {
-                name: 'Sunlight',
-                data: #{@sunlight_points}
-            }]
-        });
+                title: {
+                    text: 'Status Over Time'
+                },
+                credits: {
+                    enabled: false
+                },
+                colors: ['#4aa2bb', '#d3b600', '#7ebe32'],
+                xAxis: {
+                    type: 'datetime',
+                    dateTimeLabelFormats: {
+                        second: '%H:%M:%S',
+                        minute: '%H:%M',
+                        hour: '%H:%M',
+                        day: '%e. %b',
+                        week: '%e. %b',
+                        month: '%b \'%y',
+                        year: '%Y'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: '% Exposure'
+                    },
+                },
+                tooltip: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Moisture',
+                    data: #{@moisture_points}
+                },
+                {
+                    name: 'Sunlight',
+                    data: #{@sunlight_points}
+                }]
+            });
+        }
     });
   p
     strong
