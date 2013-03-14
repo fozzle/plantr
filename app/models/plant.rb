@@ -20,6 +20,7 @@ class Plant < ActiveRecord::Base
   belongs_to :garden
   belongs_to :sensor
   has_many :logs
+  has_many :tasks
 
   attr_accessor :clear_logs
   attr_accessible :name, :sensor_id, :clear_logs
@@ -29,7 +30,6 @@ class Plant < ActiveRecord::Base
   validates_uniqueness_of :sensor_id
 
   scope :order_by_urgency, order('health DESC, updated_at DESC')
-
 
   private
 

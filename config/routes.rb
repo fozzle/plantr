@@ -15,7 +15,9 @@ Plantr::Application.routes.draw do
     resources :plants, :only => [:index, :new, :create]
   end
 
-  resources :plants, :except => [:index, :new, :create]
+  resources :plants, :except => [:index, :new, :create] do
+    resources :tasks
+  end
 
   resources :logs, :only => :create
 
