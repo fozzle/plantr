@@ -69,11 +69,45 @@ class Plant < ActiveRecord::Base
   end
 
   def send_notification
+    twilio_sid = "AC3d33aec0094782093e058f29c5093856"
+    twilio_token = "c7151b10ee5ad0318135974ad31e8cae"
+    twilio_phone_number = self.phone
+
+    return if self.phone.empty?
+
+    @twilio_client = Twilio::REST::Client.new twilio_sid, twilio_token
+
     if self.health_changed?
-      if self.health_was == 'bad' and self.health != 'bad'
-        logger.debug self.health
-      elsif self.health_was != 'bad' and self.health == 'bad'
-        logger.debug self.health
+      if self.health_was == 'bad' and (self.health == 'good' or self.health == 'fair')
+        self.garden.users.each do |user|
+          next if user.phone.empty?
+
+          @twilio_client.account.sms.messages.create(
+                :from => "+1#{twilio_phone_number}",
+                :to => "#{user.phone}",
+                :body => "Your #{plant.name.pluralize} are doing better!"
+          )
+        end
+      elsif (self.health_was != 'good' or self.health_was == 'fair') and self.health == 'bad'
+        self.garden.users.each do |user|
+          next if user.phone.empty?
+
+          @twilio_client.account.sms.messages.create(
+                :from => "+1#{twilio_phone_number}",
+                :to => "#{user.phone}",
+                :body => "Oh no! Your #{plant.name.pluralize} need water!"
+          )
+        end
+      elsif (self.health_was != 'good' or self.health_was == 'fair') and self.health == 'overwatered'
+        self.garden.users.each do |user|
+          next if user.phone.empty?
+
+          @twilio_client.account.sms.messages.create(
+                :from => "+1#{twilio_phone_number}",
+                :to => "#{user.phone}",
+                :body => "Oh no! Your #{plant.name.pluralize} are overwatered!"
+          )
+        end
       end
     end
   end
