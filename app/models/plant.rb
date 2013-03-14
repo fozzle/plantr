@@ -15,7 +15,7 @@
 class Plant < ActiveRecord::Base
   after_initialize :set_default
   after_touch :set_health
-  after_save :send_notification
+  # after_save :send_notification
 
   belongs_to :garden
   belongs_to :sensor
@@ -30,22 +30,15 @@ class Plant < ActiveRecord::Base
 
   scope :order_by_urgency, order('health DESC, updated_at DESC')
 
-  private
 
-  def sensor_id_exists
-    begin
-      Sensor.find(self.sensor_id)
-    rescue ActiveRecord::RecordNotFound
-      errors.add(:sensor_id, "We couldn't find that sensor.")
-      false
-    end
-  end
+  private
 
   def set_health
     last_log = self.logs.last
 
     if last_log.nil?
       self.health = :good
+      self.save
       return
     end
 
@@ -60,6 +53,18 @@ class Plant < ActiveRecord::Base
       self.health = :fair
     else
       self.health = :bad
+    end
+    self.save
+
+  end
+
+
+  def sensor_id_exists
+    begin
+      Sensor.find(self.sensor_id)
+    rescue ActiveRecord::RecordNotFound
+      errors.add(:sensor_id, "We couldn't find that sensor.")
+      false
     end
   end
 
