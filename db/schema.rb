@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130314000338) do
     t.float    "temperature"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "plant_id"
+    t.integer  "plant_id"
   end
 
   create_table "plant_types", :force => true do |t|
