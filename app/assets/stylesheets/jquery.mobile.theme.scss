@@ -335,10 +335,11 @@ $white: #fff;
 .ui-btn-hover-b:hover,
 .ui-btn-hover-b a.ui-link-inherit {
     color:                  #fff /*{b-bhover-color}*/;
+    background: $lightgreen;
 }
 .ui-btn-down-b {
     border: 1px solid       $darkgreen /*{b-bdown-border}*/;
-    background:             $lightgreen /*{b-bdown-background-color}*/;
+    background:             $darkgreen /*{b-bdown-background-color}*/;
     font-weight: bold;
     color:                  $white /*{b-bdown-color}*/;
 }
@@ -346,6 +347,7 @@ $white: #fff;
 .ui-btn-down-b:hover,
 .ui-btn-down-b a.ui-link-inherit {
     color:                  #fff /*{b-bdown-color}*/;
+    background:             mix(#000, $green, 10%);
 }
 .ui-btn-up-b,
 .ui-btn-hover-b,
