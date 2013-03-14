@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.jqplot
-//= jqplot.dateAxisRenderer
 //= require_tree .
 //= require jquery.mobile
+//= require highcharts.js
