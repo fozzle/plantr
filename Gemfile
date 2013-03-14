@@ -42,6 +42,8 @@ gem 'jquery_mobile_fa_rails'
 gem 'foreigner'
 gem "font-awesome-rails"
 
+gem 'twilio-ruby'
+
 gem 'barometer'
 
 # To use ActiveModel has_secure_password
