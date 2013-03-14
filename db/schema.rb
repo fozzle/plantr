@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20130314001358) do
     t.integer  "plant_type_id"
     t.date     "plant_date"
     t.string   "sensor_id"
-    t.integer  "health"
+    t.string   "health"
   end
 
   add_index "plants", ["sensor_id"], :name => "index_plants_on_sensor_id", :unique => true

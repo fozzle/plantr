@@ -15,6 +15,7 @@
 class Plant < ActiveRecord::Base
   after_initialize :set_default
   after_touch :set_health
+  after_save :send_notification
 
   HEALTH_STATES = [:good, :fair, :bad]
 
@@ -51,7 +52,7 @@ class Plant < ActiveRecord::Base
     last_log = self.logs.last
 
     if last_log.nil?
-      self.health = 0
+      self.health = :good
       return
     end
 
@@ -63,11 +64,21 @@ class Plant < ActiveRecord::Base
     elsif moisture < 0.5 and moisture >= 0.3
       self.health = 1
     else
-      self.health = 2
+      self.health = :bad
     end
   end
 
-  def set_default
-    self.health ||= 0
+  def send_notification
+    if self.health_changed?
+      if self.health_was == 'bad' and self.health != 'bad'
+        logger.debug self.health
+      elsif self.health_was != 'bad' and self.health == 'bad'
+        logger.debug self.health
+      end
+    end
+  end
+
+  def :set_default
+    self.health ||= 'good'
   end
 end

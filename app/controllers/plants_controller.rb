@@ -11,7 +11,11 @@ class PlantsController < ApplicationController
 
   def show
     @plant = Plant.find(params[:id])
+    @logs = @plant.logs
     authorize! :read, @plant
+
+    @moisture_points = @logs.map { |x| [x.updated_at.to_s, x.moisture] }
+    @sunlight_points = @logs.map { |x| [x.updated_at.to_s, x.sunlight / 1000] }
 
     render :layout => 'plants'
   end

@@ -12,7 +12,8 @@ ul data-role="listview" data-inset="true"
           span.ui-li-count
             = garden.plants.count
       - garden.plants.order_by_urgency.limit(3).each do |plant|
-        li.plant class="status-#{plant.status}"
+        li.plant
+          span class="plant-status #{plant.health}"
           = link_to plant_path(plant) do
             = plant.name
             - if plant.logs.count > 0

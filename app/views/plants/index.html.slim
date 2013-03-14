@@ -9,6 +9,7 @@ ul data-role="listview" data-inset="true"
     - @plants.each do |plant|
       li
         = link_to plant_path(plant) do
+          span class="plant-status #{plant.health}"
           = plant.name
           - if plant.logs.count > 0
             p.ui-li-aside
