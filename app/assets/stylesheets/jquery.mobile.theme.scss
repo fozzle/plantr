@@ -72,7 +72,7 @@ $white: #fff;
     margin-bottom: -8px;
 }
 
-.plant-status.bad {
+.plant-status.bad, .plant-status.overwatered {
     width: 32px;
     height: 21px;
     background-position: -38px -52px;
