@@ -1,7 +1,8 @@
 - content_for :title, "Gardens"
 - content_for :header_content do
   h1 = content_for(:title)
-  = link_to "Add", new_garden_path, class: 'ui-btn-right'
+  = link_to new_garden_path, class: 'icon ui-btn-right' do
+    i.icon-plus
 
 ul data-role="listview" data-inset="true"
   - if not @gardens.empty?
