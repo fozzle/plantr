@@ -1,6 +1,6 @@
 - content_for :title, @plant.name
 - content_for :header_content do
-  = link_to plant_path(@plant), class: 'icon ui-btn-left', data: { direction: 'reverse' } do
+  = link_to garden_plants_path(@plant.garden), class: 'icon ui-btn-left', data: { direction: 'reverse' } do
   	i.icon-arrow-left
   h1 = content_for(:title)
 
