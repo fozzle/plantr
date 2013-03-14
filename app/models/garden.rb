@@ -11,7 +11,7 @@
 class Garden < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :plants, :dependent => :delete_all
-  attr_accessible :name, :zip_code
+  attr_accessible :name, :zip_code, :phone
 
   validates_presence_of :name
 

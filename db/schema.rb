@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313224451) do
+ActiveRecord::Schema.define(:version => 20130314000338) do
 
   create_table "gardens", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "zip_code"
+    t.string   "phone"
   end
 
   create_table "gardens_users", :id => false, :force => true do |t|
@@ -60,8 +61,6 @@ ActiveRecord::Schema.define(:version => 20130313224451) do
     t.string "sens_id", :null => false
   end
 
-  add_index "sensors", ["sens_id"], :name => "index_sensors_on_sens_id", :unique => true
-
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -76,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20130313224451) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "username"
+    t.string   "phone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

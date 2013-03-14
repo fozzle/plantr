@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessor :login
-  attr_accessible :email, :username, 
+  attr_accessible :email, :username, :phone,
                   :password, :password_confirmation, :remember_me
 
   has_and_belongs_to_many :gardens

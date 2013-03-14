@@ -32,7 +32,7 @@
   p
     strong
       | Moisture: 
-    span = number_to_percentage(@plant.logs.last.moisture, :precision => 0)
+    span = number_to_percentage(@plant.logs.last.moisture * 100, :precision => 0)
   p
     strong
       | Light: 

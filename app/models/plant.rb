@@ -71,7 +71,7 @@ class Plant < ActiveRecord::Base
     end
   end
 
-  def :set_default
+  def set_default
     self.health ||= 'good'
   end
 end
