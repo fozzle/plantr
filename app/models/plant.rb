@@ -30,10 +30,6 @@ class Plant < ActiveRecord::Base
 
   scope :order_by_urgency, order('health DESC, updated_at DESC')
 
-  def status
-    health ||= 0
-  end
-
   private
 
   def sensor_id_exists
@@ -79,32 +75,32 @@ class Plant < ActiveRecord::Base
     if self.health_changed?
       if self.health_was == 'bad' and (self.health == 'good' or self.health == 'fair')
         self.garden.users.each do |user|
-          next if user.phone.empty?
+          next if user.phone.nil?
 
           @twilio_client.account.sms.messages.create(
                 :from => "+1#{twilio_phone_number}",
                 :to => "#{user.phone}",
-                :body => "Your #{plant.name.pluralize} are doing better!"
+                :body => "Your #{self.name.pluralize} are doing better!"
           )
         end
       elsif (self.health_was != 'good' or self.health_was == 'fair') and self.health == 'bad'
         self.garden.users.each do |user|
-          next if user.phone.empty?
+          next if user.phone.nil?
 
           @twilio_client.account.sms.messages.create(
                 :from => "+1#{twilio_phone_number}",
                 :to => "#{user.phone}",
-                :body => "Oh no! Your #{plant.name.pluralize} need water!"
+                :body => "Oh no! Your #{self.name.pluralize} need water!"
           )
         end
       elsif (self.health_was != 'good' or self.health_was == 'fair') and self.health == 'overwatered'
         self.garden.users.each do |user|
-          next if user.phone.empty?
+          next if user.phone.nil?
 
           @twilio_client.account.sms.messages.create(
                 :from => "+1#{twilio_phone_number}",
                 :to => "#{user.phone}",
-                :body => "Oh no! Your #{plant.name.pluralize} are overwatered!"
+                :body => "Oh no! Your #{self.name.pluralize} are overwatered!"
           )
         end
       end
