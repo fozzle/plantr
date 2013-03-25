@@ -69,13 +69,11 @@ class Plant < ActiveRecord::Base
   end
 
   def send_notification
-    twilio_sid = "AC3d33aec0094782093e058f29c5093856"
-    twilio_token = "c7151b10ee5ad0318135974ad31e8cae"
     twilio_phone_number = self.garden.phone
 
     return if twilio_phone_number.nil?
 
-    @twilio_client = Twilio::REST::Client.new twilio_sid, twilio_token
+    @twilio_client = Twilio::REST::Client.new ENV["TWILIO_SID"], ENV["TWILIO_TOKEN"]
 
     if self.health_changed?
       if self.health_was == 'bad' and (self.health == 'good' or self.health == 'fair')
