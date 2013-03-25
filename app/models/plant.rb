@@ -58,7 +58,6 @@ class Plant < ActiveRecord::Base
 
   end
 
-
   def sensor_id_exists
     begin
       Sensor.find(self.sensor_id)
@@ -76,34 +75,34 @@ class Plant < ActiveRecord::Base
     @twilio_client = Twilio::REST::Client.new ENV["TWILIO_SID"], ENV["TWILIO_TOKEN"]
 
     if self.health_changed?
-      if self.health_was == 'bad' and (self.health == 'good' or self.health == 'fair')
+      if (self.health_was == 'bad' or self.health_was == 'overwatered') and (self.health == 'good' or self.health == 'fair')
         self.garden.users.each do |user|
           next if user.phone.nil?
 
           @twilio_client.account.sms.messages.create(
-                :from => "+1#{twilio_phone_number}",
-                :to => "#{user.phone}",
-                :body => "Your #{self.name.pluralize} are doing better!"
+            :from => "+1#{twilio_phone_number}",
+            :to => "#{user.phone}",
+            :body => "Your #{self.name.downcase.pluralize} are doing better!"
           )
         end
-      elsif (self.health_was != 'good' or self.health_was == 'fair') and self.health == 'bad'
+      elsif self.health_was != 'bad' and self.health == 'bad'
         self.garden.users.each do |user|
           next if user.phone.nil?
 
           @twilio_client.account.sms.messages.create(
-                :from => "+1#{twilio_phone_number}",
-                :to => "#{user.phone}",
-                :body => "Oh no! Your #{self.name.pluralize} need water!"
+            :from => "+1#{twilio_phone_number}",
+            :to => "#{user.phone}",
+            :body => "Oh no! Your #{self.name.downcase.pluralize} need water!"
           )
         end
-      elsif (self.health_was != 'good' or self.health_was == 'fair') and self.health == 'overwatered'
+      elsif self.health_was != 'overwatered' and self.health == 'overwatered'
         self.garden.users.each do |user|
           next if user.phone.nil?
 
           @twilio_client.account.sms.messages.create(
-                :from => "+1#{twilio_phone_number}",
-                :to => "#{user.phone}",
-                :body => "Oh no! Your #{self.name.pluralize} are overwatered!"
+            :from => "+1#{twilio_phone_number}",
+            :to => "#{user.phone}",
+            :body => "Oh no! Your #{self.name.downcase.pluralize} are overwatered!"
           )
         end
       end
