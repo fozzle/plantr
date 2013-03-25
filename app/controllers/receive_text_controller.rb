@@ -12,7 +12,7 @@ class ReceiveTextController < ApplicationController
     return if garden.nil?
 
     garden.users.each do |user|
-    	next if user.phone.nil?
+    	next if user.phone.nil? or user.phone == from_number
 
       @twilio_client.account.sms.messages.create(
         :from => "+1#{to_number}",

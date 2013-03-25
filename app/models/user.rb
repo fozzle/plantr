@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
 
   scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
 
+  def phone=(phone)
+    @phone = "+1" + phone.gsub(/(\+1|[^0-9])/, "")
+  end
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
