@@ -5,3 +5,7 @@ $(document).bind("mobileinit", function() {
 $(document).bind("pageinit", function() {
 
 });
+
+$(document).bind('pageshow', function() {
+  $($('.page.ui-page-active form :input:visible')[0]).focus();
+});

@@ -15,9 +15,9 @@ task :send_plant_reminders => :environment do
         next if user.phone.nil?
 
         @twilio_client.account.sms.messages.create(
-          :from => "+1#{twilio_phone_number}",
+          :from => "+1#{twilio_phone_numbezr}",
           :to => "#{user.phone}",
-          :body => "Reminder for your #{task.plant.name.pluralize}: #{task.description}"
+          :body => "Reminder for your #{task.plant.name.downcase.pluralize}: #{task.description}"
         )
       end
     end

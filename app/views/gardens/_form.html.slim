@@ -10,4 +10,4 @@
   - unless @garden.new_record?
     .ui-grid-solo
       .ui-block-a
-        = link_to 'Delete', @garden, :method => :delete, data: { role: 'button', theme: 'd' }
+        = link_to 'Delete', @garden, :method => :delete, :confirm => 'Are you sure?', data: { role: 'button', theme: 'd' }
