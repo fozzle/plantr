@@ -363,7 +363,7 @@ $blue: #4aa2bb;
     font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-b .ui-link-inherit {
-    color:  #333 /*{b-body-color}*/;
+    color:  $black /*{b-body-color}*/;
 }
 .ui-body-b .ui-link {
     color: #2489ce /*{b-body-link-color}*/;
@@ -458,7 +458,7 @@ $blue: #4aa2bb;
 .ui-body-c,
 .ui-overlay-c {
     border: 1px solid       #aaa /*{c-body-border}*/;
-    color:                  #333 /*{c-body-color}*/;
+    color:                  $black /*{c-body-color}*/;
     background:             $creme /*{c-body-background-color}*/;
 }
 .ui-overlay-c {
@@ -473,7 +473,7 @@ $blue: #4aa2bb;
     font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-c .ui-link-inherit {
-    color:  #333 /*{c-body-color}*/;
+    color:  $black /*{c-body-color}*/;
 }
 .ui-body-c .ui-link {
     color: $green /*{c-body-link-color}*/;
@@ -544,7 +544,7 @@ $blue: #4aa2bb;
 .ui-bar-d {
     border: 1px solid       #bbb /*{d-bar-border}*/;
     background:             #bbb /*{d-bar-background-color}*/;
-    color:                  #333 /*{d-bar-color}*/;
+    color:                  $black /*{d-bar-color}*/;
     font-weight: bold;
     background-image: -webkit-gradient(linear, left top, left bottom, from( #ddd /*{d-bar-background-start}*/), to( #bbb /*{d-bar-background-end}*/)); /* Saf4+, Chrome */
     background-image: -webkit-linear-gradient( #ddd /*{d-bar-background-start}*/, #bbb /*{d-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -561,7 +561,7 @@ $blue: #4aa2bb;
     font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-bar-d .ui-link-inherit {
-    color:  #333 /*{d-bar-color}*/;
+    color:  $black /*{d-bar-color}*/;
 }
 .ui-bar-d a.ui-link {
     color: #2489ce /*{d-bar-link-color}*/;
@@ -579,7 +579,7 @@ $blue: #4aa2bb;
 .ui-body-d,
 .ui-overlay-d {
     border: 1px solid       #bbb /*{d-body-border}*/;
-    color:                  #333 /*{d-body-color}*/;
+    color:                  $black /*{d-body-color}*/;
     background:             #fff /*{d-body-background-color}*/;
     background-image: -webkit-gradient(linear, left top, left bottom, from( #fff /*{d-body-background-start}*/), to( #fff /*{d-body-background-end}*/)); /* Saf4+, Chrome */
     background-image: -webkit-linear-gradient( #fff /*{d-body-background-start}*/, #fff /*{d-body-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -600,7 +600,7 @@ $blue: #4aa2bb;
     font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-d .ui-link-inherit {
-    color:  #333 /*{d-body-color}*/;
+    color:  $black /*{d-body-color}*/;
 }
 .ui-body-d .ui-link {
     color: #2489ce /*{d-body-link-color}*/;
@@ -660,7 +660,7 @@ $blue: #4aa2bb;
 .ui-bar-e {
     border: 1px solid       #f7c942 /*{e-bar-border}*/;
     background:             #fadb4e /*{e-bar-background-color}*/;
-    color:                  #333 /*{e-bar-color}*/;
+    color:                  $black /*{e-bar-color}*/;
     font-weight: bold;
     background-image: -webkit-gradient(linear, left top, left bottom, from( #fceda7 /*{e-bar-background-start}*/), to( #fbef7e /*{e-bar-background-end}*/)); /* Saf4+, Chrome */
     background-image: -webkit-linear-gradient( #fceda7 /*{e-bar-background-start}*/, #fbef7e /*{e-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -677,7 +677,7 @@ $blue: #4aa2bb;
     font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-bar-e .ui-link-inherit {
-    color:  #333 /*{e-bar-color}*/;
+    color:  $black /*{e-bar-color}*/;
 }
 .ui-bar-e a.ui-link {
     color: #2489ce /*{e-bar-link-color}*/;
@@ -750,7 +750,7 @@ $blue: #4aa2bb;
 .ui-btn-hover-e:visited,
 .ui-btn-hover-e:hover,
 .ui-btn-hover-e a.ui-link-inherit {
-    color:                  #333 /*{e-bhover-color}*/;
+    color:                  $black /*{e-bhover-color}*/;
 }
 .ui-btn-down-e {
     border: 1px solid       $darkgreen /*{e-bdown-border}*/;
