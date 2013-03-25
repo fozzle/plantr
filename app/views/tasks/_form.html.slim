@@ -1,7 +1,7 @@
 = simple_form_for [@plant, @task] do |f|
   = f.error_notification
   div data-role="fieldcontain"
-  	= f.input :description, required: true, autofocus: true
+  	= f.input :description, required: true
   div data-role="fieldcontain"
     = f.input :weeks, :label => 'Interval in Weeks', :as => :integer, default: 0, required: true
   fieldset data-type="horizontal" data-role="controlgroup" data-mini="true" style="text-align: center"

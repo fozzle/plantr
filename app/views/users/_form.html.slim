@@ -1,7 +1,7 @@
 = simple_form_for [@garden, @user] do |f|
   = f.error_notification
   div data-role="fieldcontain"
-  	= f.input :username, required: true, autofocus: true
+  	= f.input :username, required: true
   fieldset.ui-grid-solo
     .ui-block-a
       = f.button :submit, "Add Member"
