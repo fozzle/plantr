@@ -30,6 +30,8 @@ end
 
 gem 'quiet_assets', :group => :development
 
+gem 'figaro'
+
 gem 'slim'
 gem 'simple_form'
 
