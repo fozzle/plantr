@@ -21,7 +21,7 @@ Plantr::Application.routes.draw do
 
   resources :logs, :only => :create
 
-  match 'sms' => 'receive_text#create', :via => [:get, :post]
+  match 'sms' => 'receive_text#create', :via => :post, :defaults => { :format => 'json' }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
