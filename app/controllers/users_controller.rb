@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
       if not @user.phone.nil? and not twilio_phone_number.nil?
         @twilio_client.account.sms.messages.create(
-          :from => "+1#{twilio_phone_number}",
+          :from => "#{twilio_phone_number}",
           :to => "#{@user.phone}",
           :body => "Welcome to Plantr! You can message your fellow #{@garden.name} gardeners with this number."
         )

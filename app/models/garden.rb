@@ -23,6 +23,10 @@ class Garden < ActiveRecord::Base
     name
   end
 
+  def phone=(p)
+    write_attribute(:phone, "+1" + p.gsub(/(\+1|[^0-9])/, ""))
+  end
+
   def has_user(user)
     self.users.all.include?(user)
   end

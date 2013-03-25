@@ -15,7 +15,7 @@ class ReceiveTextController < ActionController::Base
         next if user.phone.nil? or user.phone == from_number
 
         @twilio_client.account.sms.messages.create(
-          :from => "+1#{to_number}",
+          :from => "#{to_number}",
           :to => "#{user.phone}",
           :body => message_body
         )
