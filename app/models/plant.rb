@@ -80,7 +80,7 @@ class Plant < ActiveRecord::Base
           next if user.phone.nil?
 
           @twilio_client.account.sms.messages.create(
-            :from => "+1#{twilio_phone_number}",
+            :from => "#{twilio_phone_number}",
             :to => "#{user.phone}",
             :body => "Your #{self.name.downcase.pluralize} are doing better!"
           )
@@ -90,7 +90,7 @@ class Plant < ActiveRecord::Base
           next if user.phone.nil?
 
           @twilio_client.account.sms.messages.create(
-            :from => "+1#{twilio_phone_number}",
+            :from => "#{twilio_phone_number}",
             :to => "#{user.phone}",
             :body => "Oh no! Your #{self.name.downcase.pluralize} need water!"
           )
@@ -100,7 +100,7 @@ class Plant < ActiveRecord::Base
           next if user.phone.nil?
 
           @twilio_client.account.sms.messages.create(
-            :from => "+1#{twilio_phone_number}",
+            :from => "#{twilio_phone_number}",
             :to => "#{user.phone}",
             :body => "Oh no! Your #{self.name.downcase.pluralize} are overwatered!"
           )
