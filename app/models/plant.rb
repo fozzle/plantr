@@ -31,6 +31,20 @@ class Plant < ActiveRecord::Base
 
   scope :order_by_urgency, order('health DESC, updated_at DESC')
 
+  def sunlight_status
+    last_log = self.logs.last
+
+    if last_log.nil?
+      'Unknown'
+    elsif last_log.sunlight > 500
+      'Bright'
+    elsif last_log.sunlight > 200
+      'Dim'
+    else
+      'Dark'
+    end
+  end
+
   private
 
   def set_health
