@@ -7,6 +7,12 @@
 - if not @plant.logs.empty?
   javascript:
     $(document).bind("pageshow", function() {
+        Highcharts.setOptions({
+            // This is for all plots, change Date axis to local timezone
+            global : {
+                useUTC : false
+            }
+        });
         if ($('#chart').length) {
             var chart;
             chart = new Highcharts.Chart({
@@ -23,6 +29,7 @@
                 colors: [/*'#4aa2bb',*/ '#d3b600', '#7ebe32'],
                 xAxis: {
                     type: 'datetime',
+                    ordinal: false,
                     dateTimeLabelFormats: {
                         second: '%H:%M:%S',
                         minute: '%H:%M',
