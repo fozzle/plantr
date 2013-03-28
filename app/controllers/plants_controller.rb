@@ -11,7 +11,7 @@ class PlantsController < ApplicationController
 
   def show
     @plant = Plant.find(params[:id])
-    @logs = @plant.logs.last(50)
+    @logs = @plant.logs.order(:id).last(50)
     authorize! :read, @plant
 
     # @moisture_points = @logs.map { |x| [x.created_at.to_time.to_i, x.moisture/10] }
