@@ -11,7 +11,9 @@ class PlantsController < ApplicationController
 
   def show
     @plant = Plant.find(params[:id])
-    @logs = @plant.logs.order(:id).last(50)
+
+    # TODO: What's the deal with .last? Investigate it's broken-ness
+    @logs = @plant.logs.limit(50).order('id DESC')
     authorize! :read, @plant
 
     # @moisture_points = @logs.map { |x| [x.created_at.to_time.to_i, x.moisture/10] }
