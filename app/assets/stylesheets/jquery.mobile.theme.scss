@@ -2453,3 +2453,8 @@ a.ui-btn.ui-slider-handle.ui-btn-hover-c {
   -webkit-border-top-right-radius: 0.6em;
   border-top-right-radius: 0.6em;
 }
+
+[meteo-icon]:before {
+    font-family: 'MeteoconsRegular';
+    content: attr(meteo-icon);
+}

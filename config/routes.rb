@@ -13,6 +13,9 @@ Plantr::Application.routes.draw do
   resources :gardens do
     resources :users
     resources :plants, :only => [:index, :new, :create]
+    member do
+      get 'weather'
+    end
   end
 
   resources :plants, :except => [:index, :new, :create] do

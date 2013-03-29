@@ -7,7 +7,7 @@
       li = nav_link garden_users_path(@garden) do
         i.icon.icon-group
         |  Members
-      li = nav_link gardens_path do
+      li = nav_link weather_garden_path(@garden) do
         i.icon.icon-cloud
         |  Weather
       li = nav_link edit_garden_path(@garden) do

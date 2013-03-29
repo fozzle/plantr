@@ -63,6 +63,16 @@ class GardensController < ApplicationController
     end
   end
 
+  def weather
+    @garden = Garden.find(params[:id])
+    require 'barometer'
+
+    barometer = Barometer.new(@garden.zip_code)
+    @weather = barometer.measure
+    
+    render :layout => 'garden' 
+  end
+
   def add_member
     @garden = Garden.find(params[:id])
 

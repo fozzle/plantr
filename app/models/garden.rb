@@ -23,6 +23,31 @@ class Garden < ActiveRecord::Base
     name
   end
 
+  def self.weather_icon(status)
+    trans = {
+      'chanceflurries' => 'V',
+      'chancerain' => 'Q',
+      'chancesleet' => 'X',
+      'chancesnow' => 'V',
+      'chancetstorms' => 'P',
+      'clear' => 'B',
+      'cloudy' => 'N',
+      'flurries' => 'U',
+      'fog' => 'M',
+      'hazy' => 'J',
+      'mostlycloudy' => 'H',
+      'mostlysunny' => 'B',
+      'partlycloudy' => 'H',
+      'partlysunny' => 'B',
+      'sleet' => 'X',
+      'rain' => 'R',
+      'snow' => 'W',
+      'sunny' => 'B',
+      'tstorms' => 'O'
+    }
+    trans[status]
+  end
+
   def phone=(p)
     write_attribute(:phone, "+1" + p.gsub(/(\+1|[^0-9])/, ""))
   end

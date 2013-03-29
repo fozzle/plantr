@@ -67,6 +67,9 @@ module Plantr
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Add fonts to assets
+    # config.assets.paths << "#{Rails.root}/app/assets/fonts"
    
   end
 end
