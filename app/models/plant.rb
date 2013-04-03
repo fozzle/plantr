@@ -68,9 +68,11 @@ class Plant < ActiveRecord::Base
     else
       self.health = :bad
     end
-    self.save
 
     self.send_notification
+    self.save
+
+
 
   end
 
