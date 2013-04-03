@@ -45,46 +45,6 @@ class Plant < ActiveRecord::Base
     end
   end
 
-  private
-
-  def set_health
-    last_log = self.logs.last
-
-    if last_log.nil?
-      self.health = :good
-      self.save
-      return
-    end
-
-    moisture = last_log.moisture
-    sunlight = last_log.sunlight
-
-    if moisture >= 800
-      self.health = :overwatered
-    elsif moisture >= 500 and moisture < 800
-      self.health = :good
-    elsif moisture < 500 and moisture >= 300
-      self.health = :fair
-    else
-      self.health = :bad
-    end
-
-    self.send_notification
-    self.save
-
-
-
-  end
-
-  def sensor_id_exists
-    begin
-      Sensor.find(self.sensor_id)
-    rescue ActiveRecord::RecordNotFound
-      errors.add(:sensor_id, "We couldn't find that sensor.")
-      false
-    end
-  end
-
   def send_notification
     twilio_phone_number = self.garden.phone
 
@@ -124,6 +84,46 @@ class Plant < ActiveRecord::Base
           )
         end
       end
+    end
+  end
+
+  private
+
+  def set_health
+    last_log = self.logs.last
+
+    if last_log.nil?
+      self.health = :good
+      self.save
+      return
+    end
+
+    moisture = last_log.moisture
+    sunlight = last_log.sunlight
+
+    if moisture >= 800
+      self.health = :overwatered
+    elsif moisture >= 500 and moisture < 800
+      self.health = :good
+    elsif moisture < 500 and moisture >= 300
+      self.health = :fair
+    else
+      self.health = :bad
+    end
+
+    self.send_notification
+    self.save
+
+
+
+  end
+
+  def sensor_id_exists
+    begin
+      Sensor.find(self.sensor_id)
+    rescue ActiveRecord::RecordNotFound
+      errors.add(:sensor_id, "We couldn't find that sensor.")
+      false
     end
   end
 
