@@ -15,7 +15,7 @@
 class Plant < ActiveRecord::Base
   after_initialize :set_default
   after_touch :set_health
-  # after_save :send_notification
+  after_save :send_notification
 
   belongs_to :garden
   belongs_to :sensor
@@ -46,6 +46,7 @@ class Plant < ActiveRecord::Base
   end
 
   def send_notification
+
     twilio_phone_number = self.garden.phone
 
     return if twilio_phone_number.nil?
@@ -93,7 +94,7 @@ class Plant < ActiveRecord::Base
     last_log = self.logs.last
 
     if last_log.nil?
-      self.health = :good
+      self.health = 'good'
       self.save
       return
     end
@@ -102,16 +103,15 @@ class Plant < ActiveRecord::Base
     sunlight = last_log.sunlight
 
     if moisture >= 800
-      self.health = :overwatered
+      self.health = 'overwatered'
     elsif moisture >= 500 and moisture < 800
-      self.health = :good
+      self.health = 'good'
     elsif moisture < 500 and moisture >= 300
-      self.health = :fair
+      self.health = 'fair'
     else
-      self.health = :bad
+      self.health = 'bad'
     end
 
-    self.send_notification
     self.save
 
 
