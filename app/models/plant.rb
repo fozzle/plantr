@@ -14,7 +14,7 @@
 
 class Plant < ActiveRecord::Base
   after_initialize :set_default
-  after_touch :set_health
+  # after_touch :set_health
   after_save :send_notification
 
   belongs_to :garden
@@ -69,6 +69,8 @@ class Plant < ActiveRecord::Base
       self.health = :bad
     end
     self.save
+
+    self.send_notification
 
   end
 
