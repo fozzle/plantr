@@ -14,8 +14,8 @@
 
 class Plant < ActiveRecord::Base
   after_initialize :set_default
-  # after_touch :set_health
-  after_save :send_notification
+  after_touch :set_health
+  # after_save :send_notification
 
   belongs_to :garden
   belongs_to :sensor
