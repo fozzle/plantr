@@ -21,7 +21,7 @@
                     backgroundColor: '#f5faf0'
                 },
                 title: {
-                    text: 'Status Over Time'
+                    text: 'Sunlight Over Time'
                 },
                 credits: {
                     enabled: false
@@ -96,6 +96,95 @@
                 }]
             });
         }
+        if ($('#chart2').length) {
+            var chart2;
+            chart2 = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'chart2',
+                    backgroundColor: '#f5faf0'
+                },
+                title: {
+                    text: 'Moisture Over Time'
+                },
+                credits: {
+                    enabled: false
+                },
+                colors: ['#4aa2bb', '#d3b600', '#7ebe32'],
+                plotOptions: {
+                  line: {
+                    marker: {
+                     enabled: false
+                    }
+                  }
+                },
+                xAxis: {
+                    type: 'datetime',
+                    ordinal: false,
+                    dateTimeLabelFormats: {
+                        second: '%H:%M:%S',
+                        minute: '%H:%M',
+                        hour: '%H:%M',
+                        day: '%e. %b',
+                        week: '%e. %b',
+                        month: '%b \'%y',
+                        year: '%Y'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Status'
+                    },
+                    labels: {
+                      enabled: false,
+                    },
+                    gridLineWidth: 0,
+                    plotBands: [
+                      {
+                        color: 'rgba(126,190,50,0.1)',
+                        from: 55,
+                        to:90,
+                        label: {
+                          text: 'Good'
+                        }
+                      },
+                      {
+                        color: 'rgba(228,200,46,0.1)',
+                        from: 30,
+                        to: 55,
+                        label: {
+                          text: 'Fair'
+                        }
+                      },
+                      {
+                        color: 'rgba(238,84,45,0.1)',
+                        from: 0,
+                        to: 30,
+                        label: {
+                          text: 'Dry'
+                        }
+                      },
+                      {
+                        color: 'rgba(238,84,45,0.1)',
+                        from: 90,
+                        to: 100,
+                        label: {
+                          text: 'Overwatered'
+                        }
+                      }],
+                    min: 0,
+                    max: 100
+                },
+                tooltip: {
+                    enabled: false
+                },
+                series: [
+                {
+                    name: 'Moisture',
+                    data: #{@moisture_points}
+                }]
+            });
+        }
+
     });
   span
   .ui-grid-b
@@ -110,6 +199,7 @@
       i.icon-lightbulb.icon
       p = @plant.sunlight_status
   #chart style="height: 300px; width: 100%; margin: 0 auto;"
+  #chart2 style="height: 300px; width: 100%; margin: 0 auto;"
 - else
   ul data-role="listview" data-inset="true"
     li

@@ -102,11 +102,11 @@ class Plant < ActiveRecord::Base
     moisture = last_log.moisture
     sunlight = last_log.sunlight
 
-    if moisture >= 800
+    if moisture >= 900
       self.health = 'overwatered'
-    elsif moisture >= 500 and moisture < 800
+    elsif moisture >= 550 and moisture < 900
       self.health = 'good'
-    elsif moisture < 500 and moisture >= 300
+    elsif moisture < 550 and moisture >= 300
       self.health = 'fair'
     else
       self.health = 'bad'

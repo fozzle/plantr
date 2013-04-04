@@ -16,7 +16,7 @@ class PlantsController < ApplicationController
     @logs = @plant.logs.limit(150).order('id DESC')
     authorize! :read, @plant
 
-    # @moisture_points = @logs.map { |x| [x.created_at.to_time.to_i, x.moisture/10] }
+    @moisture_points = @logs.map { |x| [x.created_at.to_time.to_i*1000, x.moisture/10] }
     @sunlight_points = @logs.map { |x| [x.created_at.to_time.to_i*1000, x.sunlight/10] }
 
     render :layout => 'plants'
