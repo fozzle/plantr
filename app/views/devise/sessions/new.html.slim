@@ -13,6 +13,8 @@
     = f.input :login, label: 'Username or email', required: true, autofocus: true, placeholder: 'Username or email'
   div.ui-hide-label data-role="fieldcontain"
     = f.input :password, required: true, placeholder: 'Password'
+  div data-role="fieldcontain"
+    = f.input :remember_me, as: :boolean, :input_html => { :checked => true } if devise_mapping.rememberable?
   .ui-grid-a
     .ui-block-a
       = f.submit "Login", data: { theme: 'b' }
