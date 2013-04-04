@@ -3,22 +3,22 @@
   div data-role="fieldcontain"
   	= f.input :description, required: true
   div data-role="fieldcontain"
-    = f.input :weeks, :label => 'Interval in Weeks', :as => :integer, default: 0, required: true
+    = f.input :weeks, :label => 'Weeks Apart', :as => :integer, :input_html => { value: 1 }, required: true
   fieldset data-type="horizontal" data-role="controlgroup" data-mini="true" style="text-align: center"
     = check_box_tag "task[days][]", 0, false, :id => "task_0"
-    = label_tag "task_0", "S"
+    = label_tag "task_0", "S", :class => 'ui-checkbox-tiny'
     = check_box_tag "task[days][]", 1, false, :id => "task_1"
-    = label_tag "task_1", "M"
+    = label_tag "task_1", "M", :class => 'ui-checkbox-tiny'
     = check_box_tag "task[days][]", 2, false, :id => "task_2"
-    = label_tag "task_2", "T"
+    = label_tag "task_2", "T", :class => 'ui-checkbox-tiny'
     = check_box_tag "task[days][]", 3, false, :id => "task_3"
-    = label_tag "task_3", "W"
+    = label_tag "task_3", "W", :class => 'ui-checkbox-tiny'
     = check_box_tag "task[days][]", 4, false, :id => "task_4"
-    = label_tag "task_4", "T"
+    = label_tag "task_4", "T", :class => 'ui-checkbox-tiny'
     = check_box_tag "task[days][]", 5, false, :id => "task_5"
-    = label_tag "task_5", "F"
+    = label_tag "task_5", "F", :class => 'ui-checkbox-tiny'
     = check_box_tag "task[days][]", 6, false, :id => "task_6"
-    = label_tag "task_6", "S"
+    = label_tag "task_6", "S", :class => 'ui-checkbox-tiny'
   .ui-grid-solo
     .ui-block-a
       = f.submit

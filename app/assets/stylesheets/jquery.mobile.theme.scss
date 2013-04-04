@@ -2458,3 +2458,43 @@ a.ui-btn.ui-slider-handle.ui-btn-hover-c {
     font-family: 'MeteoconsRegular';
     content: attr(meteo-icon);
 }
+
+.ui-checkbox-list .ui-checkbox {
+    label {
+        border-radius: 0;
+        border-top-width: 0;
+    }
+
+    &:first-child label {
+        border-top-left-radius: 0.2em;
+        border-top-right-radius: 0.2em;
+        border-top-width: 1px;
+    }
+
+    &:last-child label {
+        border-bottom-left-radius: 0.2em;
+        border-bottom-right-radius: 0.2em;
+    }
+}
+
+.ui-controlgroup-horizontal .ui-checkbox {
+    .ui-checkbox-tiny {
+        border-radius: 0;
+    }
+
+    &:first-child .ui-checkbox-tiny {
+        border-top-left-radius: 0.2em;
+        border-bottom-left-radius: 0.2em;
+    }
+
+    &:last-child .ui-checkbox-tiny {
+        border-top-right-radius: 0.2em;
+        border-bottom-right-radius: 0.2em;
+    }
+}
+
+.ui-controlgroup-horizontal .ui-checkbox-tiny .ui-btn-inner {
+    padding-left: 13px !important;
+    padding-right: 10px !important;
+    border-radius: 0;
+}

@@ -9,7 +9,7 @@
 - if not @users.empty?
   = simple_form_for @garden do |f|
     = hidden_field_tag "garden[user_ids][]", nil
-    fieldset data-role="controlgroup"
+    fieldset.ui-checkbox-list data-role="controlgroup"
       - @users.each do |user|
         = check_box_tag "garden[user_ids][]", user.id, false, :id => "user_#{user.id}"
         = label_tag "user_#{user.id}", user.username

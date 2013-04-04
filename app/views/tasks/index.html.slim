@@ -9,10 +9,14 @@
 - if not @tasks.empty?
   = simple_form_for @plant do |f|
     = hidden_field_tag "plant[task_ids][]", nil
-    fieldset data-role="controlgroup"
+    fieldset.ui-checkbox-list data-role="controlgroup"
       - @tasks.each do |task|
         = check_box_tag "plant[task_ids][]", task.id, false, :id => "task_#{task.id}"
-        = label_tag "task_#{task.id}", task.description
+        = label_tag "task_#{task.id}" do
+          = task.description
+          br
+          small
+            = task.schedule.to_s
     .ui-grid-solo
       .ui-block-a
         = f.button :submit, "Delete Selected", data: { theme: 'd' }
