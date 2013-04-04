@@ -63,7 +63,7 @@ class PlantsController < ApplicationController
       redirect_to plant_tasks_path(@plant)
     elsif @plant.update_attributes(params[:plant])
       if @plant.clear_logs == '1'
-        @plant.logs.destroy_all
+        @plant.logs.delete_all
       end
 
       flash[:success] = "Saved!"
