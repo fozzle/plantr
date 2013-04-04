@@ -12,10 +12,12 @@ class ReceiveTextController < ActionController::Base
     
     unless garden.nil?
       from_user = garden.users.find_by_phone(from_number.gsub(/(\+1|[^0-9])/, ""))
+      Rails.logger.debug user
 
       unless from_user.nil?
         garden.users.each do |user|
-          next if user.phone.nil? or user == from_user
+          Rails.logger.debug user
+          #next if user.phone.nil? or user == from_user
 
           @twilio_client.account.sms.messages.create(
             :from => "#{to_number}",
