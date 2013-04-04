@@ -11,14 +11,18 @@ class ReceiveTextController < ActionController::Base
     garden = Garden.where(:phone => to_number).first
     
     unless garden.nil?
-      garden.users.each do |user|
-        next if user.phone.nil? or user.phone == from_number
+      from_user = garden.users.find_by_phone(from_number.gsub(/(\+1|[^0-9])/, ""))
 
-        @twilio_client.account.sms.messages.create(
-          :from => "#{to_number}",
-          :to => "#{user.phone}",
-          :body => message_body
-        )
+      unless from_user.nil?
+        garden.users.each do |user|
+          next if user.phone.nil? or user == from_user
+
+          @twilio_client.account.sms.messages.create(
+            :from => "#{to_number}",
+            :to => "#{user.phone}",
+            :body => "#{user.username}: " + message_body
+          )
+        end
       end
     end
 
